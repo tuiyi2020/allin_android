@@ -40,6 +40,7 @@ public class AllInNativeAd extends BaseAllInAd {
                     return;
                 }
                 ad.setActivity(activity);
+                ad.setViewContainer(container);
                 ad.setAdConfig(adConfig);
                 ad.setAdCallback(adListener);
                 ad.loadAd();

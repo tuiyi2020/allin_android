@@ -9,7 +9,6 @@ import com.bytedance.sdk.openadsdk.TTAdDislike;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
 import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
-import com.jd.ad.sdk.adapter.TTAdManagerHolder;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.nativead.CustomNativeAd;
 
@@ -24,17 +23,18 @@ public class TTNativeAd extends CustomNativeAd {
     private TTNativeExpressAd mTTAd;
     private TTAdNative mTTAdNative;
 
-    public TTNativeAd(){
+    public TTNativeAd() {
 
     }
 
     @Override
     public void loadAd() {
+        mAdConfig.thirdPid = "945702238";
         //step2:创建TTAdNative对象，createAdNative(Context context) banner广告context需要传入Activity对象
-        mTTAdNative = TTAdManagerHolder.jad_it().createAdNative(mActivity);
+        mTTAdNative = TTAdManagerHolder.get().createAdNative(mActivity);
         //step3:(可选，强烈建议在合适的时机调用):申请部分权限，如read_phone_state,防止获取不了imei时候，下载类广告没有填充的问题。
-        TTAdManagerHolder.jad_it().requestPermissionIfNecessary(mActivity);
-        loadExpressAd("901121253");
+        TTAdManagerHolder.get().requestPermissionIfNecessary(mActivity);
+        loadExpressAd(mAdConfig.thirdPid, mAdConfig.width, mAdConfig.height);
     }
 
     @Override
@@ -59,16 +59,14 @@ public class TTNativeAd extends CustomNativeAd {
 
     }
 
-    private void loadExpressAd(String codeId) {
+    private void loadExpressAd(String codeId, int width, int height) {
         mViewContainer.removeAllViews();
-        float expressViewWidth = 350;
-        float expressViewHeight = 350;
 
         //step4:创建广告请求参数AdSlot,具体参数含义参考文档
         AdSlot adSlot = new AdSlot.Builder()
                 .setCodeId(codeId) //广告位id
                 .setAdCount(1) //请求广告数量为1到3条
-                .setExpressViewAcceptedSize(expressViewWidth,expressViewHeight) //期望模板广告view的size,单位dp
+                .setExpressViewAcceptedSize(width, height) //期望模板广告view的size,单位dp
                 .build();
         //step5:请求广告，对请求回调的广告作渲染处理
         mTTAdNative.loadNativeExpressAd(adSlot, new TTAdNative.NativeExpressAdListener() {
@@ -79,7 +77,7 @@ public class TTNativeAd extends CustomNativeAd {
 
             @Override
             public void onNativeExpressAdLoad(List<TTNativeExpressAd> ads) {
-                if (ads == null || ads.size() == 0){
+                if (ads == null || ads.size() == 0) {
                     return;
                 }
                 mTTAd = ads.get(0);
@@ -89,6 +87,7 @@ public class TTNativeAd extends CustomNativeAd {
             }
         });
     }
+
     private long startTime = 0;
 
     private boolean mHasShowDownloadActive = false;
@@ -115,7 +114,7 @@ public class TTNativeAd extends CustomNativeAd {
         });
         //dislike设置
         bindDislike(ad, false);
-        if (ad.getInteractionType() != TTAdConstant.INTERACTION_TYPE_DOWNLOAD){
+        if (ad.getInteractionType() != TTAdConstant.INTERACTION_TYPE_DOWNLOAD) {
             return;
         }
         ad.setDownloadListener(new TTAppDownloadListener() {
@@ -150,6 +149,7 @@ public class TTNativeAd extends CustomNativeAd {
 
     /**
      * 设置广告的不喜欢，注意：强烈建议设置该逻辑，如果不设置dislike处理逻辑，则模板广告中的 dislike区域不响应dislike事件。
+     *
      * @param ad
      * @param customStyle 是否自定义样式，true:样式自定义
      */

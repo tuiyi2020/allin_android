@@ -28,7 +28,7 @@ public abstract class BaseAllInAd implements IAllInAd {
     protected int getAdType(String type) {
         switch (type) {
             case AdConstants.TYPE_JD:
-                return AdFactory.TYPE_TT;
+                return AdFactory.TYPE_JD;
             case AdConstants.TYPE_GDT:
                 return AdFactory.TYPE_GDT;
             case AdConstants.TYPE_TT:

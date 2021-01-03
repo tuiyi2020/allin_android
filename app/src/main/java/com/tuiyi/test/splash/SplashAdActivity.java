@@ -3,7 +3,6 @@ package com.tuiyi.test.splash;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -21,9 +20,6 @@ import com.tuiyi.test.R;
  */
 public class SplashAdActivity extends BaseActivity {
 
-
-
-    private ViewGroup mViewContain;
 
     private Spinner mSpinner;
 
@@ -54,13 +50,9 @@ public class SplashAdActivity extends BaseActivity {
     protected void initView() {
 
         mSpinner = findViewById(R.id.spPlatform);
-        mViewContain = findViewById(R.id.llContainer);
-        findViewById(R.id.tvLoadBanner).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SplashAdShowActivity.startActivity(SplashAdActivity.this,mPlatformIds[mCurrentPos]);
-            }
-        });
+        findViewById(R.id.tvLoad).setOnClickListener(
+                view -> SplashAdShowActivity.startActivity(SplashAdActivity.this, mPlatformIds[mCurrentPos])
+        );
 
     }
 

@@ -61,12 +61,9 @@ public class BannerAdActivity extends BaseActivity {
 
         mSpinner = findViewById(R.id.spPlatform);
         mViewContain = findViewById(R.id.llContainer);
-        findViewById(R.id.tvLoadBanner).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAd();
-            }
-        });
+        findViewById(R.id.tvLoad).setOnClickListener(
+                view -> showAd()
+        );
     }
 
     @Override
@@ -129,7 +126,7 @@ public class BannerAdActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mAllInBannerAd!=null){
+        if (mAllInBannerAd != null) {
             mAllInBannerAd.destroyAd();
         }
     }

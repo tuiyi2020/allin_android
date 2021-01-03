@@ -58,12 +58,9 @@ public class InsertAdActivity extends BaseActivity {
     protected void initView() {
         mSpinner = findViewById(R.id.spPlatform);
         mViewContain = findViewById(R.id.llContainer);
-        findViewById(R.id.tvLoadBanner).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAd();
-            }
-        });
+        findViewById(R.id.tvLoad).setOnClickListener(
+                view -> showAd()
+        );
     }
 
     @Override

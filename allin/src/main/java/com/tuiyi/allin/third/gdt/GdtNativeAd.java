@@ -29,9 +29,8 @@ public class GdtNativeAd extends CustomNativeAd {
     @Override
     public void loadAd() {
 
-        int width = 300;
-        int height = 100;
-        mNativeExpressAd = new NativeExpressAD(mActivity, new ADSize(width, height), mAdConfig.thirdPid, new NativeExpressAD.NativeExpressADListener() {
+        mAdConfig.thirdPid="5060295460765937";
+        mNativeExpressAd = new NativeExpressAD(mActivity, new ADSize(mAdConfig.width, mAdConfig.height), mAdConfig.thirdPid, new NativeExpressAD.NativeExpressADListener() {
             @Override
             public void onADClicked(NativeExpressADView nativeExpressADView) {
                 notifyAdClick();
@@ -60,6 +59,7 @@ public class GdtNativeAd extends CustomNativeAd {
             @Override
             public void onADLoaded(List<NativeExpressADView> list) {
                 mNativeExpressADView = list.get(0);
+                mNativeExpressADView.render();
 
             }
 
@@ -75,6 +75,8 @@ public class GdtNativeAd extends CustomNativeAd {
 
             @Override
             public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
+                mViewContainer.removeAllViews();
+                mViewContainer.addView(nativeExpressADView);
                 notifyAdReady();
             }
 
@@ -83,16 +85,11 @@ public class GdtNativeAd extends CustomNativeAd {
                 notifyAdFail(new com.tuiyi.allin.core.AdError(adError.getErrorCode(), adError.getErrorMsg()));
             }
         });
-        if (mNativeExpressADView != null) {
-            mNativeExpressADView.render();
-        }
+        mNativeExpressAd.loadAD(1);
     }
 
     @Override
     public void showAd() {
-        if (mNativeExpressAd != null) {
-            mNativeExpressAd.loadAD(0);
-        }
     }
 
     @Override

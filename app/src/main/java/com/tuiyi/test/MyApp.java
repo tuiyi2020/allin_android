@@ -25,6 +25,7 @@ public class MyApp extends Application {
         JadYunSdk.init(this,
                 new JadYunSdkConfig.Builder()
                         .setAppId("337230")
+                        //.setAppId("116567")
                         .setEnableLog(true)
                         .build());
 

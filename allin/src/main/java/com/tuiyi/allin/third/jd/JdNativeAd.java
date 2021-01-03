@@ -23,6 +23,14 @@ public class JdNativeAd extends CustomNativeAd {
 
 
     public JdNativeAd() {
+
+    }
+
+    @Override
+    public void loadAd() {
+        mAdConfig.thirdPid="6518";
+        mAdConfig.width = 640;
+        mAdConfig.height = 360;
         JadPlacementParams jadSlot = new JadPlacementParams.Builder()
                 .setPlacementId(mAdConfig.thirdPid)
                 .setSize(mAdConfig.width, mAdConfig.height)
@@ -47,6 +55,7 @@ public class JdNativeAd extends CustomNativeAd {
             public void onAdRenderSuccess(View view) {
                 AllInLog.i("FeedAd Render Success");
                 isRender = true;
+                feedAd.showAd(mViewContainer);
                 notifyAdReady();
             }
 
@@ -74,11 +83,7 @@ public class JdNativeAd extends CustomNativeAd {
                 notifyAdClose();
             }
         });
-    }
-
-    @Override
-    public void loadAd() {
-
+        feedAd.loadAd();
     }
 
     @Override
@@ -87,13 +92,15 @@ public class JdNativeAd extends CustomNativeAd {
             return;
         }
         if (isRender) {
-            feedAd.showAd(mViewContainer);
+
         }
     }
 
     @Override
     public void destroyAd() {
-
+        if (feedAd!=null){
+            feedAd.destroy();
+        }
     }
 
     @Override
