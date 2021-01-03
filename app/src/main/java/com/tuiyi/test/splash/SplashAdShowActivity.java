@@ -74,7 +74,7 @@ public class SplashAdShowActivity extends BaseActivity {
 
             @Override
             public void onAdClose() {
-
+                finish();
             }
         });
 

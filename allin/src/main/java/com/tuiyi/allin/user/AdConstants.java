@@ -46,4 +46,13 @@ public interface AdConstants {
     //测试广点通插屏
     String GDT_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
 
+    //测试JSDK开屏
+    String JSDK_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
+    //测试广点通信息流
+    String JSDK_NATIVE_ID = "e62KtPb6SPkTwpsJH3aY";
+    //测试广点通横幅
+    String JSDK_BANNER_ID = "fXPzySZy9u0xyrzwl0p4";
+    //测试广点通插屏
+    String JSDK_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
+
 }

@@ -26,8 +26,8 @@ public class JsdkSplashAd extends CustomSplashAd {
 
     @Override
     public void loadAd() {
-
-
+        mAdConfig.thirdPid="GL2TTLZJK3JTFWXECFJ1";
+        mAdConfig.showTime=15;
         mJyAdListener2 = new JyAdListener2() {
             @Override
             public void onADClicked() {
@@ -38,13 +38,13 @@ public class JsdkSplashAd extends CustomSplashAd {
             @Override
             public void onADExposure() {
                 super.onADExposure();
-                notifyAdReady();
+               // notifyAdReady();
             }
 
             @Override
             public void onADReceive(JyNative jyNative) {
                 super.onADReceive(jyNative);
-                notifyAdReady();
+                //notifyAdReady();
             }
 
             @Override

@@ -39,7 +39,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.tuiyi.sdk:jsdk-test:1.0.4'
+    api 'com.tuiyi.sdk:jsdk-oaid:1.0.6'
     api (name:'GDTSDK.unionNoPlugin.4.294.1164', ext:'aar')
     implementation (name:'Baidu_MobAds_SDK-release',ext:'aar')
     api(name: 'jad_yun_sdk_v1.0.14', ext: 'aar')
