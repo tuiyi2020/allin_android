@@ -162,6 +162,7 @@ public class NetManager {
                 mListener.onFail("网络错误");
             }else {
                 mListener.onSuccess(result);
+                AllInLog.i("success:"+result);
             }
         }
     }

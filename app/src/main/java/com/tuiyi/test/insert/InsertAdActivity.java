@@ -88,7 +88,7 @@ public class InsertAdActivity extends BaseActivity {
     }
 
     private void showAd() {
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(AdConstants.JD_INSERT_ID).build();
+        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlatformIds[mCurrentPos]).build();
         mAllInInsertAd = new AllInInsertAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {
