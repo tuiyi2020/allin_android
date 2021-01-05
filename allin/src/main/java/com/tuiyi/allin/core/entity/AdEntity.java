@@ -48,8 +48,15 @@ public class AdEntity {
                     } catch (JSONException e) {
                     }
                     adSourceEntity.showinterval = adsJsonObject.getInt("showinterval");
-                    adSourceEntity.type=adsJsonObject.getString("type");
-                    adSourceEntity.classname=adsJsonObject.getString("classname");
+                    try {
+                        adSourceEntity.type=adsJsonObject.getString("type");
+                    } catch (JSONException e) {
+                    }
+                    try {
+                        adSourceEntity.classname=adsJsonObject.getString("classname");
+                    } catch (JSONException e) {
+                    }
+
                     adSourceEntityList.add(adSourceEntity);
                 }
                 entity.sourceid=adSourceEntityList;
