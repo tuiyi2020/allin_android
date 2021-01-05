@@ -29,13 +29,13 @@ public interface AdConstants {
     String JD_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
 
     //测试头条开屏
-    String TT_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
+    String TT_SPLASH_ID = "UOZGbnASqBIndi0suUw";
     //测试头条信息流
-    String TT_NATIVE_ID = "e62KtPb6SPkTwpsJH3aY";
+    String TT_NATIVE_ID = "PXk4HcVeyqJyvS4cgcir";
     //测试头条横幅
-    String TT_BANNER_ID = "fXPzySZy9u0xyrzwl0p4";
+    String TT_BANNER_ID = "wslgl51thg5fZuCxyZcV";
     //测试头条插屏
-    String TT_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
+    String TT_INSERT_ID = "eX23kRJM9bD9VNiRP4Na";
 
     //测试广点通开屏
     String GDT_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";

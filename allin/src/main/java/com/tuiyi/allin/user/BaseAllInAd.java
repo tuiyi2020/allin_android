@@ -3,6 +3,7 @@ package com.tuiyi.allin.user;
 import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.AdErrorCode;
 import com.tuiyi.allin.core.entity.AdEntity;
+import com.tuiyi.allin.core.entity.AdSourceEntity;
 import com.tuiyi.allin.core.net.NetApi;
 import com.tuiyi.allin.core.net.NetListener;
 import com.tuiyi.allin.core.net.NetManager;
@@ -28,7 +29,7 @@ public abstract class BaseAllInAd implements IAllInAd {
     protected int getAdType(String type) {
         switch (type) {
             case AdConstants.TYPE_JD:
-                return AdFactory.TYPE_JSDK;
+                return AdFactory.TYPE_JD;
             case AdConstants.TYPE_GDT:
                 return AdFactory.TYPE_GDT;
             case AdConstants.TYPE_TT:
@@ -53,16 +54,6 @@ public abstract class BaseAllInAd implements IAllInAd {
         }
         String json = jsonObject.toString();
         AllInLog.i(json);
-        getConfig(json, adNetCallBack);
-    }
-
-    /**
-     * 获取广告配置
-     *
-     * @param json 配置参数
-     */
-    private void getConfig(String json, AdNetCallBack adNetCallBack) {
-
         new NetManager(new NetListener() {
             @Override
             public void onSuccess(String result) {
@@ -71,7 +62,11 @@ public abstract class BaseAllInAd implements IAllInAd {
                     AdEntity adEntity = new AdEntity().getAdEntityByResult(result);
                     if (adEntity.sourceid == null || adEntity.sourceid.isEmpty()) {
                         adNetCallBack.loadFail(new AdError(AdErrorCode.NO_AD_ERROR, "NO Ad"));
+                        netLog(NetApi.REQUEST_LOG, placeId, adEntity.bid, deviceInfo, null, null, null, null, null);
                     } else {
+                        // TODO: 1/4/21  bid
+                        AdSourceEntity sourceEntity = adEntity.sourceid.get(0);
+                        netLog(NetApi.REQUEST_LOG, placeId, adEntity.bid, deviceInfo, sourceEntity.sourceid, sourceEntity.appid, sourceEntity.placeid, sourceEntity.type, null);
                         adNetCallBack.loadSuccess(adEntity);
                     }
                 }
@@ -82,21 +77,39 @@ public abstract class BaseAllInAd implements IAllInAd {
                 AllInLog.e("fail:" + message);
                 if (adNetCallBack != null) {
                     adNetCallBack.loadFail(new AdError(AdErrorCode.NET_ERROR, message));
+                    netLog(NetApi.REQUEST_LOG, placeId, null, deviceInfo, null, null, null, null, null);
                 }
             }
         }).doPost(NetApi.GET_CONFIG, json);
 
+        //getConfig(json,deviceInfo, adNetCallBack);
     }
 
     /**
      * 广告日志
      *
-     * @param url  请求地址
-     * @param json 日志信息
+     * @param url 请求地址
      */
-    protected void netLog(String url, String json) {
+    protected void netLog(String url, String placeid, String bid, JSONObject deviceInfo, String sourceid, String appid, String sourcePlaceid, String type, String error) {
+        //获取日志实体
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("placeid", placeid);
+            jsonObject.put("bid", bid);
+            jsonObject.put("deviceinfo", deviceInfo);
 
-        new NetManager().doPost(url, json);
+            JSONObject sourceObj = new JSONObject();
+            sourceObj.put("sourceid", sourceid);
+            sourceObj.put("appid", appid);
+            sourceObj.put("sourcePlaceid", sourcePlaceid);
+            sourceObj.put("type", type);
+            sourceObj.put("error", error);
+            jsonObject.put("source",sourceObj);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+         new NetManager().doPost(url, jsonObject.toString());
 
     }
 

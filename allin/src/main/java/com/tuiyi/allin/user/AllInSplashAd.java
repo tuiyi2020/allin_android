@@ -33,6 +33,8 @@ public class AllInSplashAd extends BaseAllInAd {
             public void loadSuccess(AdEntity entity) {
                 AdSourceEntity adSourceEntity = entity.sourceid.get(0);
                 adConfig.thirdPid = adSourceEntity.placeid;
+                adConfig.bid=entity.bid;
+                adConfig.adSourceEntity=adSourceEntity;
                 ad = AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
                 if (ad == null) {
                     adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));

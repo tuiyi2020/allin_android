@@ -1,5 +1,7 @@
 package com.tuiyi.allin.core;
 
+import com.tuiyi.allin.core.entity.AdSourceEntity;
+
 /**
  * @author liuhuijie
  * @date 2020/11/30
@@ -13,6 +15,11 @@ public class AdConfig {
     //客户自定义 广告路径
     public String className;
 
+    //广告信息
+    public String bid;
+    public AdSourceEntity adSourceEntity;
+
+
     public AdConfig(Builder builder) {
         this.width = builder.width;
         this.height = builder.height;
@@ -21,7 +28,6 @@ public class AdConfig {
         this.thirdPid = builder.thirdPid;
     }
 
-
     public static final class Builder {
         private int width;
         private int height;
@@ -29,6 +35,9 @@ public class AdConfig {
         private String placeId;
         private String thirdPid;
         private String className;
+        //广告信息
+        public String bid;
+        public AdSourceEntity adSourceEntity;
 
         public Builder() {
 
@@ -61,6 +70,16 @@ public class AdConfig {
 
         public Builder setClassName(String className) {
             this.className = className;
+            return this;
+        }
+
+        public Builder setBid(String bid) {
+            this.bid = bid;
+            return this;
+        }
+
+        public Builder setAdSource(AdSourceEntity adSourceEntity) {
+            this.adSourceEntity = adSourceEntity;
             return this;
         }
 
