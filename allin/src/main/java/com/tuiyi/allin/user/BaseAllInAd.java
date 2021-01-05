@@ -64,7 +64,6 @@ public abstract class BaseAllInAd implements IAllInAd {
                         adNetCallBack.loadFail(new AdError(AdErrorCode.NO_AD_ERROR, "NO Ad"));
                         netLog(NetApi.REQUEST_LOG, placeId, adEntity.bid, deviceInfo, null, null, null, null, null);
                     } else {
-                        // TODO: 1/4/21  bid
                         AdSourceEntity sourceEntity = adEntity.sourceid.get(0);
                         netLog(NetApi.REQUEST_LOG, placeId, adEntity.bid, deviceInfo, sourceEntity.sourceid, sourceEntity.appid, sourceEntity.placeid, sourceEntity.type, null);
                         adNetCallBack.loadSuccess(adEntity);
