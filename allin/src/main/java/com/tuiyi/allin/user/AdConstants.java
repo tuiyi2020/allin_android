@@ -38,13 +38,13 @@ public interface AdConstants {
     String TT_INSERT_ID = "eX23kRJM9bD9VNiRP4Na";
 
     //测试广点通开屏
-    String GDT_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
+    String GDT_SPLASH_ID = "PUWUHXVY0FTOBU0IKPZ9";
     //测试广点通信息流
-    String GDT_NATIVE_ID = "e62KtPb6SPkTwpsJH3aY";
+    String GDT_NATIVE_ID = "8DLCSJH0NBM2TY3TY1JA";
     //测试广点通横幅
-    String GDT_BANNER_ID = "fXPzySZy9u0xyrzwl0p4";
+    String GDT_BANNER_ID = "VMG2EQLBNQE7XZRKSHIC";
     //测试广点通插屏
-    String GDT_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
+    String GDT_INSERT_ID = "3ZCUQBOPRCWQUK634UXE";
 
     //测试JSDK开屏
     String JSDK_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";

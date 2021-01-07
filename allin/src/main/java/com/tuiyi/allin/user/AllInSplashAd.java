@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.tuiyi.allin.core.AdConfig;
 import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.AdErrorCode;
+import com.tuiyi.allin.core.OnAdReloadListener;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.entity.AdSourceEntity;
 import com.tuiyi.allin.core.splashad.CustomSplashAd;
@@ -31,20 +32,29 @@ public class AllInSplashAd extends BaseAllInAd {
         makeRequest(adConfig.placeId, adConfig.width, adConfig.height, SysInfoUtils.getDeviceInfo(activity), new AdNetCallBack() {
             @Override
             public void loadSuccess(AdEntity entity) {
+                /*if (entity.sourceid.get(0).){
+
+                }*/
                 AdSourceEntity adSourceEntity = entity.sourceid.get(0);
                 adConfig.thirdPid = adSourceEntity.placeid;
-                adConfig.bid=entity.bid;
-                adConfig.adSourceEntity=adSourceEntity;
                 ad = AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
                 if (ad == null) {
                     adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                     return;
                 }
-                ad.setActivity(activity);
+                ad.setAdConfig(activity, adConfig, entity, adListener, new OnAdReloadListener() {
+                    @Override
+                    public void onAdReload(Activity activity, AdConfig adConfig, AdSourceEntity adSourceEntity) {
+                        ad=AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
+                        if (ad == null) {
+                            adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
+                            return;
+                        }
+                        ad.setViewContainer(container);
+                        ad.loadAd();
+                    }
+                });
                 ad.setViewContainer(container);
-                ad.setAdConfig(adConfig);
-                ad.setAdCallback(adListener);
-                ad.customAdMessage(entity);
                 ad.loadAd();
             }
 
@@ -83,6 +93,7 @@ public class AllInSplashAd extends BaseAllInAd {
     @Override
     public void destroyAd() {
         if (ad != null) {
+            ad.removeAdCallBack();
             ad.destroyAd();
         }
     }

@@ -22,11 +22,13 @@ public class GdtSplashAd extends CustomSplashAd {
 
     @Override
     public void customAdMessage(AdEntity adEntity) {
-        mAdConfig.thirdPid = "8863364436303842593";
+
+
     }
 
     @Override
     public void loadAd() {
+        mAdConfig.thirdPid = "8863364436303842593";
         mSplashADListener = new SplashADListener() {
             @Override
             public void onADClicked() {

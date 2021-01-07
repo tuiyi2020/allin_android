@@ -8,7 +8,8 @@ package com.tuiyi.allin.core.net;
  */
 public interface NetApi {
    // String BASE_URL = "http://bj-l.adxvip.com/";
-    String BASE_URL="https://allin.51tuiyi.com/";
+   // String BASE_URL="https://allin.51tuiyi.com/";
+    String BASE_URL="https://allinapi.51tuiyi.com/";
     String GET_CONFIG = BASE_URL + "sapi.LoadConfiguration";
     String REQUEST_LOG = BASE_URL + "sapi.RequestLogServlet";
     String REQUEST_FAIL_LOG = BASE_URL + "sapi.RequestFailLogServlet";

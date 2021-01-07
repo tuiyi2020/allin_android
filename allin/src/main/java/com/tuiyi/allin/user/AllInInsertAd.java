@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import com.tuiyi.allin.core.AdConfig;
 import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.AdErrorCode;
+import com.tuiyi.allin.core.OnAdReloadListener;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.entity.AdSourceEntity;
 import com.tuiyi.allin.core.insertad.CustomInsertAd;
@@ -38,10 +39,17 @@ public class AllInInsertAd extends BaseAllInAd {
                     adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                     return;
                 }
-                ad.setAdCallback(adListener);
-                ad.setActivity(activity);
-                ad.setAdConfig(adConfig);
-                ad.setAdCallback(adListener);
+                ad.setAdConfig(activity, adConfig, entity, adListener, new OnAdReloadListener() {
+                    @Override
+                    public void onAdReload(Activity activity, AdConfig adConfig, AdSourceEntity adSourceEntity) {
+                        ad = AdFactory.getInsertAd(getAdType(adSourceEntity.sourceid), adConfig);
+                        if (ad == null) {
+                            adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
+                            return;
+                        }
+                        ad.loadAd();
+                    }
+                });
                 ad.loadAd();
             }
 
@@ -71,6 +79,7 @@ public class AllInInsertAd extends BaseAllInAd {
     @Override
     public void destroyAd() {
         if (ad != null) {
+            ad.removeAdCallBack();
             ad.destroyAd();
         }
 
