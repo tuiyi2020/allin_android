@@ -13,5 +13,7 @@ public interface AdErrorCode {
     int PARAM_MISS = 30001;
     //未知类型广告
     int UNKNOWN_AD_TYPE = 40001;
+    //不符合展示规则
+    int UN_RULES = 50001;
 
 }

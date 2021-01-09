@@ -68,14 +68,14 @@ public abstract class AbstractAd implements IAd {
 
     //广告展示失败 加载下一条
     public final void notifyAdFail(AdError adError) {
-        if (mAdCallback != null&&mOnAdReloadListener!=null) {
+        if (mAdCallback != null && mOnAdReloadListener != null) {
             netLog(NetApi.REQUEST_FAIL_LOG);
-            if (mAdEntity != null && mAdEntity.sourceid != null && mAdEntity.sourceid.size() > mCurrentAdPos++) {
+            if (mAdEntity != null && mAdEntity.sourceid != null && mAdEntity.sourceid.size() > ++mCurrentAdPos) {
                 mOnAdReloadListener.onAdReload(mActivity, mAdConfig, mAdEntity.sourceid.get(mCurrentAdPos));
             } else {
                 adFailBack(adError);
             }
-        }else{
+        } else {
             adFailBack(adError);
         }
     }

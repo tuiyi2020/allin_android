@@ -10,6 +10,7 @@ import com.tuiyi.allin.core.OnAdReloadListener;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.entity.AdSourceEntity;
 import com.tuiyi.allin.core.insertad.CustomInsertAd;
+import com.tuiyi.allin.utlis.LocalUtils;
 import com.tuiyi.allin.utlis.SysInfoUtils;
 
 /**
@@ -44,12 +45,19 @@ public class AllInInsertAd extends BaseAllInAd {
                     public void onAdReload(Activity activity, AdConfig adConfig, AdSourceEntity adSourceEntity) {
                         ad = AdFactory.getInsertAd(getAdType(adSourceEntity.sourceid), adConfig);
                         if (ad == null) {
-                            adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
+                            ad.notifyAdFail(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                             return;
                         }
+                        ad.setAdConfig(activity, adConfig, entity, adListener, this);
                         ad.loadAd();
                     }
                 });
+                if (!LocalUtils.getAdIsAvailable(activity, adSourceEntity)) {
+                    ad.notifyAdFail(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
+                    return;
+                } else {
+                    LocalUtils.insertAd(activity, LocalUtils.getUnitId(adSourceEntity));
+                }
                 ad.loadAd();
             }
 

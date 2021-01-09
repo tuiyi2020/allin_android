@@ -10,6 +10,7 @@ import com.tuiyi.allin.core.OnAdReloadListener;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.entity.AdSourceEntity;
 import com.tuiyi.allin.core.splashad.CustomSplashAd;
+import com.tuiyi.allin.utlis.LocalUtils;
 import com.tuiyi.allin.utlis.SysInfoUtils;
 
 /**
@@ -32,9 +33,6 @@ public class AllInSplashAd extends BaseAllInAd {
         makeRequest(adConfig.placeId, adConfig.width, adConfig.height, SysInfoUtils.getDeviceInfo(activity), new AdNetCallBack() {
             @Override
             public void loadSuccess(AdEntity entity) {
-                /*if (entity.sourceid.get(0).){
-
-                }*/
                 AdSourceEntity adSourceEntity = entity.sourceid.get(0);
                 adConfig.thirdPid = adSourceEntity.placeid;
                 ad = AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
@@ -45,15 +43,22 @@ public class AllInSplashAd extends BaseAllInAd {
                 ad.setAdConfig(activity, adConfig, entity, adListener, new OnAdReloadListener() {
                     @Override
                     public void onAdReload(Activity activity, AdConfig adConfig, AdSourceEntity adSourceEntity) {
-                        ad=AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
+                        ad = AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
                         if (ad == null) {
-                            adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
+                            ad.notifyAdFail(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                             return;
                         }
+                        ad.setAdConfig(activity, adConfig, entity, adListener, this);
                         ad.setViewContainer(container);
                         ad.loadAd();
                     }
                 });
+                if (!LocalUtils.getAdIsAvailable(activity, adSourceEntity)) {
+                    ad.notifyAdFail(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
+                    return;
+                } else {
+                    LocalUtils.insertAd(activity, LocalUtils.getUnitId(adSourceEntity));
+                }
                 ad.setViewContainer(container);
                 ad.loadAd();
             }
@@ -117,4 +122,5 @@ public class AllInSplashAd extends BaseAllInAd {
             ad.onResumeAd();
         }
     }
+
 }
