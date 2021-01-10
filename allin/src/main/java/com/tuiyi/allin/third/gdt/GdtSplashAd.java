@@ -47,7 +47,7 @@ public class GdtSplashAd extends CustomSplashAd {
 
             @Override
             public void onADLoaded(long l) {
-
+                notifyAdReady();
             }
 
             @Override

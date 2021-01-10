@@ -90,7 +90,6 @@ public class TTInsertAd extends CustomInsertAd {
                 mTTAd = ads.get(0);
                 bindAdListener(mTTAd);
                 AllInLog.i("load success !");
-                notifyAdReady();
             }
         });
     }
@@ -99,23 +98,28 @@ public class TTInsertAd extends CustomInsertAd {
         ad.setExpressInteractionListener(new TTNativeExpressAd.AdInteractionListener() {
             @Override
             public void onAdDismiss() {
+                notifyAdClose();
             }
 
             @Override
             public void onAdClicked(View view, int type) {
+                notifyAdClick();
             }
 
             @Override
             public void onAdShow(View view, int type) {
+                notifyAdShow();
             }
 
             @Override
             public void onRenderFail(View view, String msg, int code) {
+                notifyAdFail(new AdError(code, msg));
             }
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
                 //返回view的宽高 单位 dp
+                notifyAdReady();
                 mTTAd.showInteractionExpressAd(mActivity);
 
             }

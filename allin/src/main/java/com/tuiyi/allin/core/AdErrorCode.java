@@ -15,5 +15,7 @@ public interface AdErrorCode {
     int UNKNOWN_AD_TYPE = 40001;
     //不符合展示规则
     int UN_RULES = 50001;
+    //渲染失败
+    int RENDER_ERROR = 60001;
 
 }

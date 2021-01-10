@@ -51,7 +51,7 @@ public class JdInsertAd extends CustomInsertAd {
             public void onAdRenderSuccess(View view) {
                 AllInLog.i("InterstitialAd Render Success");
                 isRender = true;
-
+                notifyAdReady();
 
             }
 

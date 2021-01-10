@@ -95,7 +95,6 @@ public class TTBannerAd extends CustomBannerAd {
                 mTTAd = ads.get(0);
                 mTTAd.setSlideIntervalTime(30 * 1000);
                 bindAdListener(mTTAd);
-                notifyAdReady();
                 AllInLog.i("load success!");
             }
         });
@@ -105,22 +104,26 @@ public class TTBannerAd extends CustomBannerAd {
         ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
             @Override
             public void onAdClicked(View view, int type) {
+                notifyAdClick();
                 AllInLog.i("广告被点击");
             }
 
             @Override
             public void onAdShow(View view, int type) {
+                notifyAdShow();
                 AllInLog.i("广告展示");
             }
 
             @Override
             public void onRenderFail(View view, String msg, int code) {
                 AllInLog.i(msg + " code:" + code);
+                notifyAdFail(new AdError(code,msg));
             }
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
                 AllInLog.i("渲染成功");
+                notifyAdReady();
                 mViewContainer.removeAllViews();
                 mViewContainer.addView(view);
             }

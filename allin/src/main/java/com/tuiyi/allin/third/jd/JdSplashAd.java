@@ -5,6 +5,7 @@ import android.view.View;
 import com.jd.ad.sdk.imp.JadListener;
 import com.jd.ad.sdk.imp.splash.SplashAd;
 import com.jd.ad.sdk.work.JadPlacementParams;
+import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.splashad.CustomSplashAd;
 
@@ -39,7 +40,7 @@ public class JdSplashAd extends CustomSplashAd {
 
             @Override
             public void onAdLoadFailed(int i, String s) {
-
+                notifyAdFail(new AdError(i,s));
             }
 
             @Override
@@ -50,7 +51,7 @@ public class JdSplashAd extends CustomSplashAd {
 
             @Override
             public void onAdRenderFailed(int i, String s) {
-
+                notifyAdFail(new AdError(i,s));
             }
 
             @Override

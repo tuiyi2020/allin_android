@@ -37,7 +37,7 @@ public class GdtNativeAd extends CustomNativeAd {
 
             @Override
             public void onADCloseOverlay(NativeExpressADView nativeExpressADView) {
-
+                notifyAdClose();
             }
 
             @Override
@@ -59,7 +59,6 @@ public class GdtNativeAd extends CustomNativeAd {
             public void onADLoaded(List<NativeExpressADView> list) {
                 mNativeExpressADView = list.get(0);
                 mNativeExpressADView.render();
-
             }
 
             @Override
@@ -69,14 +68,14 @@ public class GdtNativeAd extends CustomNativeAd {
 
             @Override
             public void onRenderFail(NativeExpressADView nativeExpressADView) {
-
+                notifyAdFail(new com.tuiyi.allin.core.AdError(com.tuiyi.allin.core.AdErrorCode.RENDER_ERROR, "渲染失败"));
             }
 
             @Override
             public void onRenderSuccess(NativeExpressADView nativeExpressADView) {
+                notifyAdReady();
                 mViewContainer.removeAllViews();
                 mViewContainer.addView(nativeExpressADView);
-                notifyAdReady();
             }
 
             @Override

@@ -98,18 +98,22 @@ public class TTNativeAd extends CustomNativeAd {
         ad.setExpressInteractionListener(new TTNativeExpressAd.ExpressAdInteractionListener() {
             @Override
             public void onAdClicked(View view, int type) {
+                notifyAdClick();
             }
 
             @Override
             public void onAdShow(View view, int type) {
+                notifyAdShow();
             }
 
             @Override
             public void onRenderFail(View view, String msg, int code) {
+                notifyAdFail(new AdError(code, msg));
             }
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
+                notifyAdReady();
                 mViewContainer.removeAllViews();
                 mViewContainer.addView(view);
             }

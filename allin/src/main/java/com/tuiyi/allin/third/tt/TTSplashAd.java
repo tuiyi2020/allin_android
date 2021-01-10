@@ -8,6 +8,7 @@ import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
 import com.bytedance.sdk.openadsdk.TTAdNative;
 import com.bytedance.sdk.openadsdk.TTAppDownloadListener;
+import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.splashad.CustomSplashAd;
 import com.tuiyi.allin.utlis.AllInLog;
@@ -59,6 +60,7 @@ public class TTSplashAd extends CustomSplashAd {
             @MainThread
             public void onError(int code, String message) {
                 AllInLog.i("code"+code+"message"+message);
+                notifyAdFail(new AdError(code,message));
             }
 
             @Override
@@ -90,11 +92,13 @@ public class TTSplashAd extends CustomSplashAd {
                 ad.setSplashInteractionListener(new com.bytedance.sdk.openadsdk.TTSplashAd.AdInteractionListener() {
                     @Override
                     public void onAdClicked(View view, int type) {
+                        notifyAdClick();
                         AllInLog.i("onAdClicked");
                     }
 
                     @Override
                     public void onAdShow(View view, int type) {
+                        notifyAdShow();
                         AllInLog.i("onAdShow");
                     }
 

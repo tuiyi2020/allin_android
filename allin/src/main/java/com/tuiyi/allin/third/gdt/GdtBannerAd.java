@@ -66,6 +66,7 @@ public class GdtBannerAd extends CustomBannerAd {
 
             @Override
             public void onADReceive() {
+                notifyAdReady();
             }
 
             @Override
