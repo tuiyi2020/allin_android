@@ -24,7 +24,7 @@ android {
         }
     }
     buildTypes {
-        debug{
+        debug {
             signingConfig signingConfigs.config
         }
         release {
@@ -40,7 +40,7 @@ android {
 }
 repositories {
     flatDir {
-        dirs 'libs','../allin/libs'
+        dirs 'libs', '../allin/libs'
     }
 }
 dependencies {
@@ -52,4 +52,9 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.tuiyi.sdk:jsdk-oaid:1.0.6'
+    implementation 'com.tuiyi.lib:gdt:1.0.0'
+    implementation 'com.tuiyi.lib:bd:1.0.0'
+    implementation 'com.tuiyi.lib:jd:1.0.0'
+    implementation 'com.tuiyi.lib:tt:1.0.0'
 }

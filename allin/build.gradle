@@ -27,9 +27,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-repositories{
-    flatDir{
-        dirs 'libs','../allin/libs'
+repositories {
+    flatDir {
+        dirs 'libs', '../allin/libs'
     }
 }
 dependencies {
@@ -39,9 +39,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    api 'com.tuiyi.sdk:jsdk-oaid:1.0.6'
-    api (name:'GDTSDK.unionNoPlugin.4.294.1164', ext:'aar')
-    implementation (name:'Baidu_MobAds_SDK-release',ext:'aar')
-    api(name: 'jad_yun_sdk_v1.0.14', ext: 'aar')
-    api(name: 'open_ad_sdk', ext: 'aar')
+    compileOnly 'com.tuiyi.sdk:jsdk-oaid:1.0.6'
+    compileOnly 'com.tuiyi.lib:gdt:1.0.0'
+    compileOnly 'com.tuiyi.lib:bd:1.0.0'
+    compileOnly 'com.tuiyi.lib:jd:1.0.0'
+    compileOnly 'com.tuiyi.lib:tt:1.0.0'
 }
+//apply from: "lib_upload.gradle"
+//apply from: "sdk_upload.gradle"
