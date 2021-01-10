@@ -1,5 +1,7 @@
 package com.tuiyi.allin.third.gdt;
 
+import android.widget.TextView;
+
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
@@ -15,6 +17,7 @@ import com.tuiyi.allin.core.splashad.CustomSplashAd;
 public class GdtSplashAd extends CustomSplashAd {
     private SplashAD mSplashAD;
     private SplashADListener mSplashADListener;
+    private TextView mSkipView;
 
     public GdtSplashAd() {
 
@@ -47,7 +50,7 @@ public class GdtSplashAd extends CustomSplashAd {
 
             @Override
             public void onADLoaded(long l) {
-                notifyAdReady();
+
             }
 
             @Override
@@ -66,7 +69,7 @@ public class GdtSplashAd extends CustomSplashAd {
             }
         };
         //6030789902606508
-        mSplashAD = new SplashAD(mActivity, mViewContainer, mAdConfig.thirdPid, mSplashADListener, 5000);
+        mSplashAD = new SplashAD(mActivity,mSkipView, mAdConfig.thirdPid, mSplashADListener, 5000);
         notifyAdReady();
     }
 

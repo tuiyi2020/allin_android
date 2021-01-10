@@ -15,6 +15,7 @@ import com.tuiyi.allin.utlis.AllInLog;
 
 /**
  * 头条闪屏广告
+ *
  * @author liuhuijie
  * @date 12/6/20
  */
@@ -25,15 +26,17 @@ public class TTSplashAd extends CustomSplashAd {
     //开屏广告加载超时时间,建议大于3000,这里为了冷启动第一次加载到广告并且展示,示例设置了3000ms
     private static final int AD_TIME_OUT = 3000;
 
-    public TTSplashAd(){
+    public TTSplashAd() {
 
     }
+
     @Override
     public void loadAd() {
         TTAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
+       // mAdConfig.thirdPid = "887416454";
         mTTAdNative = TTAdManagerHolder.get().createAdNative(mActivity);
         String mCodeId = mAdConfig.thirdPid;
-        boolean mIsExpress=false;
+        boolean mIsExpress = false;
         //step3:创建开屏广告请求参数AdSlot,具体参数含义参考文档
         AdSlot adSlot = null;
         if (mIsExpress) {
@@ -45,7 +48,7 @@ public class TTSplashAd extends CustomSplashAd {
                     .setCodeId(mCodeId)
                     //模板广告需要设置期望个性化模板广告的大小,单位dp,代码位是否属于个性化模板广告，请在穿山甲平台查看
                     //view宽高等于图片的宽高
-                    .setExpressViewAcceptedSize(mAdConfig.width,mAdConfig.height)
+                    .setExpressViewAcceptedSize(mAdConfig.width, mAdConfig.height)
                     .build();
         } else {
             adSlot = new AdSlot.Builder()
@@ -59,8 +62,8 @@ public class TTSplashAd extends CustomSplashAd {
             @Override
             @MainThread
             public void onError(int code, String message) {
-                AllInLog.i("code"+code+"message"+message);
-                notifyAdFail(new AdError(code,message));
+                AllInLog.i("code" + code + "message" + message);
+                notifyAdFail(new AdError(code, message));
             }
 
             @Override
@@ -72,19 +75,19 @@ public class TTSplashAd extends CustomSplashAd {
             @Override
             @MainThread
             public void onSplashAdLoad(com.bytedance.sdk.openadsdk.TTSplashAd ad) {
-                AllInLog.i( "开屏广告请求成功");
+                AllInLog.i("开屏广告请求成功");
                 if (ad == null) {
                     return;
                 }
                 //获取SplashView
                 View view = ad.getSplashView();
-                if (view != null && mViewContainer != null &&mActivity!=null&& !mActivity.isFinishing()) {
+                if (view != null && mViewContainer != null && mActivity != null && !mActivity.isFinishing()) {
                     mViewContainer.removeAllViews();
                     //把SplashView 添加到ViewGroup中,注意开屏广告view：width >=70%屏幕宽；height >=50%屏幕高
                     mViewContainer.addView(view);
                     //设置不开启开屏广告倒计时功能以及不显示跳过按钮,如果这么设置，您需要自定义倒计时逻辑
                     //ad.setNotAllowSdkCountdown();
-                }else {
+                } else {
 
                 }
 
@@ -105,15 +108,16 @@ public class TTSplashAd extends CustomSplashAd {
                     @Override
                     public void onAdSkip() {
                         AllInLog.i("onAdSkip");
-
+                        notifyAdClose();
                     }
 
                     @Override
                     public void onAdTimeOver() {
+                        notifyAdClose();
                         AllInLog.i("onAdTimeOver");
                     }
                 });
-                if(ad.getInteractionType() == TTAdConstant.INTERACTION_TYPE_DOWNLOAD) {
+                if (ad.getInteractionType() == TTAdConstant.INTERACTION_TYPE_DOWNLOAD) {
                     ad.setDownloadListener(new TTAppDownloadListener() {
                         boolean hasShow = false;
 
