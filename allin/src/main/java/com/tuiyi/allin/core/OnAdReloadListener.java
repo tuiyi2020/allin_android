@@ -11,5 +11,5 @@ import com.tuiyi.allin.core.entity.AdSourceEntity;
  * @date 1/7/21
  */
 public interface OnAdReloadListener {
-    void onAdReload(Activity activity, AdConfig adConfig, AdSourceEntity adSourceEntity);
+    void onAdReload(Activity activity, AdConfig adConfig,int currentPos, AdSourceEntity adSourceEntity);
 }

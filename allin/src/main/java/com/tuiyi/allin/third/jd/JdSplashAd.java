@@ -16,7 +16,7 @@ import com.tuiyi.allin.core.splashad.CustomSplashAd;
  */
 public class JdSplashAd extends CustomSplashAd {
 
-     private SplashAd mSplashAd;
+    private SplashAd mSplashAd;
 
     public JdSplashAd() {
 
@@ -24,6 +24,7 @@ public class JdSplashAd extends CustomSplashAd {
 
     @Override
     public void loadAd() {
+        JdAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         JadPlacementParams jadParams = null;
         jadParams = new JadPlacementParams.Builder()
                 .setPlacementId(mAdConfig.thirdPid)

@@ -97,7 +97,7 @@ public class LocalUtils {
         long lastShowTime = getLastShowTime(context, getUnitId(adSourceEntity));
         if (adSourceEntity.showinterval > 0 && lastShowTime > 0) {
             long passTime = System.currentTimeMillis() - lastShowTime;
-            if (adSourceEntity.showinterval * 1000 < passTime) {
+            if (adSourceEntity.showinterval * 1000 > passTime) {
                 //小于展示间隔
                 return false;
             }
@@ -124,7 +124,7 @@ public class LocalUtils {
         if (adSourceEntity == null) {
             return null;
         }
-        return adSourceEntity.appid + adSourceEntity.sourceid;
+        return adSourceEntity.appid + adSourceEntity.placeid;
     }
 
 

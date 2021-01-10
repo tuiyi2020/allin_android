@@ -34,7 +34,9 @@ public class AllInSplashAd extends BaseAllInAd {
             @Override
             public void loadSuccess(AdEntity entity) {
                 AdSourceEntity adSourceEntity = entity.sourceid.get(0);
+                adConfig.appId=adSourceEntity.appid;
                 adConfig.thirdPid = adSourceEntity.placeid;
+                adConfig.className=adSourceEntity.classname;
                 ad = AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
                 if (ad == null) {
                     adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
@@ -42,13 +44,14 @@ public class AllInSplashAd extends BaseAllInAd {
                 }
                 ad.setAdConfig(activity, adConfig, entity, adListener, new OnAdReloadListener() {
                     @Override
-                    public void onAdReload(Activity activity, AdConfig adConfig, AdSourceEntity adSourceEntity) {
+                    public void onAdReload(Activity activity, AdConfig adConfig,int currentPos, AdSourceEntity adSourceEntity) {
                         ad = AdFactory.getSplashAd(getAdType(adSourceEntity.sourceid), adConfig);
                         if (ad == null) {
-                            ad.notifyAdFail(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
+                            adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                             return;
                         }
                         ad.setAdConfig(activity, adConfig, entity, adListener, this);
+                        ad.setCurrentAdPos(currentPos);
                         ad.setViewContainer(container);
                         ad.loadAd();
                     }

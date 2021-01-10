@@ -29,8 +29,7 @@ public class TTSplashAd extends CustomSplashAd {
     }
     @Override
     public void loadAd() {
-        mAdConfig.thirdPid="887416454";
-        // TTAdManagerHolder.init(activity.getApplicationContext(),adConfig.a);
+        TTAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         mTTAdNative = TTAdManagerHolder.get().createAdNative(mActivity);
         String mCodeId = mAdConfig.thirdPid;
         boolean mIsExpress=false;

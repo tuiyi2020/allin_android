@@ -7,7 +7,8 @@ package com.tuiyi.allin.core;
  */
 public class AdConfig {
     public String placeId;
-    public String thirdPid;//三方的placeId
+    public String appId; //三方appId
+    public String thirdPid;//三方placeId
     public int width;
     public int height;
     public int showTime;
@@ -21,6 +22,8 @@ public class AdConfig {
         this.showTime = builder.showTime;
         this.placeId = builder.placeId;
         this.thirdPid = builder.thirdPid;
+        this.appId = builder.appId;
+        this.className = builder.className;
     }
 
     public static final class Builder {
@@ -28,6 +31,7 @@ public class AdConfig {
         private int height;
         private int showTime;
         private String placeId;
+        private String appId;
         private String thirdPid;
         private String className;
 
@@ -57,6 +61,11 @@ public class AdConfig {
 
         public Builder setThirdPid(String thirdPid) {
             this.thirdPid = thirdPid;
+            return this;
+        }
+
+        public Builder setThirdAppId(String appId) {
+            this.appId = appId;
             return this;
         }
 

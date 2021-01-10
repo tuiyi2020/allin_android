@@ -23,7 +23,7 @@ public class GdtInsertAd extends CustomInsertAd {
 
     @Override
     public void loadAd() {
-        mAdConfig.thirdPid = "4080298282218338";
+        GdtAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         mInsertAd = new UnifiedInterstitialAD(mActivity, mAdConfig.thirdPid, new UnifiedInterstitialADListener() {
             @Override
             public void onADClicked() {
@@ -57,7 +57,7 @@ public class GdtInsertAd extends CustomInsertAd {
 
             @Override
             public void onNoAD(AdError adError) {
-                AllInLog.i(adError.getErrorMsg()+"=="+adError.getErrorCode());
+                AllInLog.i(adError.getErrorMsg() + "==" + adError.getErrorCode());
                 notifyAdFail(new com.tuiyi.allin.core.AdError(adError.getErrorCode(), adError.getErrorMsg()));
             }
 

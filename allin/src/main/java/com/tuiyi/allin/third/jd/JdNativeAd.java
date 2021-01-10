@@ -28,9 +28,7 @@ public class JdNativeAd extends CustomNativeAd {
 
     @Override
     public void loadAd() {
-        mAdConfig.thirdPid="6518";
-        mAdConfig.width = 640;
-        mAdConfig.height = 360;
+        JdAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         JadPlacementParams jadSlot = new JadPlacementParams.Builder()
                 .setPlacementId(mAdConfig.thirdPid)
                 .setSize(mAdConfig.width, mAdConfig.height)

@@ -28,6 +28,7 @@ public class JdBannerAd extends CustomBannerAd {
 
     @Override
     public void loadAd() {
+        JdAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         if (mViewContainer != null) {
             mViewContainer.removeAllViews();
         }

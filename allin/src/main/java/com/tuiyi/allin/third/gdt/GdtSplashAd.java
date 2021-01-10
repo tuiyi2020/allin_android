@@ -28,7 +28,7 @@ public class GdtSplashAd extends CustomSplashAd {
 
     @Override
     public void loadAd() {
-        mAdConfig.thirdPid = "8863364436303842593";
+        GdtAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         mSplashADListener = new SplashADListener() {
             @Override
             public void onADClicked() {

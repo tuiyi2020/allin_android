@@ -33,6 +33,9 @@ public abstract class BaseAllInAd implements IAllInAd {
                 return AdFactory.TYPE_GDT;
             case AdConstants.TYPE_TT:
                 return AdFactory.TYPE_TT;
+            case "CKT0PHYUXJUR8I6DO8R5"://test
+                return AdFactory.TYPE_TT;
+                //custom
         }
         return -1;
     }

@@ -28,8 +28,7 @@ public class GdtNativeAd extends CustomNativeAd {
 
     @Override
     public void loadAd() {
-
-        mAdConfig.thirdPid="5060295460765937";
+        GdtAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         mNativeExpressAd = new NativeExpressAD(mActivity, new ADSize(mAdConfig.width, mAdConfig.height), mAdConfig.thirdPid, new NativeExpressAD.NativeExpressADListener() {
             @Override
             public void onADClicked(NativeExpressADView nativeExpressADView) {

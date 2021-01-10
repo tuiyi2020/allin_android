@@ -32,8 +32,7 @@ public class GdtBannerAd extends CustomBannerAd {
 
     @Override
     public void loadAd() {
-
-        mAdConfig.thirdPid = "4080052898050840";
+        GdtAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         mBannerView = new UnifiedBannerView(mActivity, mAdConfig.thirdPid, new UnifiedBannerADListener() {
             @Override
             public void onADClicked() {

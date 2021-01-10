@@ -41,6 +41,10 @@ public abstract class AbstractAd implements IAd {
         customAdMessage(adEntity);
     }
 
+    public void setCurrentAdPos(int currentAdPos) {
+        this.mCurrentAdPos = currentAdPos;
+    }
+
 
     public void removeAdCallBack() {
         this.mAdCallback = null;
@@ -71,7 +75,10 @@ public abstract class AbstractAd implements IAd {
         if (mAdCallback != null && mOnAdReloadListener != null) {
             netLog(NetApi.REQUEST_FAIL_LOG);
             if (mAdEntity != null && mAdEntity.sourceid != null && mAdEntity.sourceid.size() > ++mCurrentAdPos) {
-                mOnAdReloadListener.onAdReload(mActivity, mAdConfig, mAdEntity.sourceid.get(mCurrentAdPos));
+                mAdConfig.appId = mAdEntity.sourceid.get(mCurrentAdPos).appid;
+                mAdConfig.thirdPid = mAdEntity.sourceid.get(mCurrentAdPos).placeid;
+                mAdConfig.className = mAdEntity.sourceid.get(mCurrentAdPos).classname;
+                mOnAdReloadListener.onAdReload(mActivity, mAdConfig, mCurrentAdPos, mAdEntity.sourceid.get(mCurrentAdPos));
             } else {
                 adFailBack(adError);
             }

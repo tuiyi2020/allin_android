@@ -27,14 +27,12 @@ public class SplashAdActivity extends BaseActivity {
             "JD",
             "GDT",
             "TT",
-            "JSDK"
     };
 
     private String mPlatformIds[] = new String[]{
             AdConstants.JD_SPLASH_ID,
             AdConstants.GDT_SPLASH_ID,
             AdConstants.TT_SPLASH_ID,
-            AdConstants.JSDK_SPLASH_ID
     };
     private int mCurrentPos;
 
