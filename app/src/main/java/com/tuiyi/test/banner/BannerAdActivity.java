@@ -94,6 +94,12 @@ public class BannerAdActivity extends BaseActivity {
         AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlatformIds[mCurrentPos]).build();
         adConfig.width = ScreenUtils.getScreenWidth(this);
         adConfig.height = (adConfig.width * 100) / 360;
+        switch (mPlatformIds[mCurrentPos]) {
+            case AdConstants.JD_BANNER_ID:
+                adConfig.width = 600;
+                adConfig.height = 150;
+                break;
+        }
         mAllInBannerAd = new AllInBannerAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {

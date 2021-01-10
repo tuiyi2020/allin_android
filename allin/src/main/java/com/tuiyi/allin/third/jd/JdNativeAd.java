@@ -12,6 +12,7 @@ import com.tuiyi.allin.utlis.AllInLog;
 
 /**
  * Jd原生广告
+ *
  * @author liuhuijie
  * @date 12/20/20
  */
@@ -28,6 +29,8 @@ public class JdNativeAd extends CustomNativeAd {
 
     @Override
     public void loadAd() {
+        mViewContainer.removeAllViews();
+        //mAdConfig.thirdPid="6676";
         JdAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         JadPlacementParams jadSlot = new JadPlacementParams.Builder()
                 .setPlacementId(mAdConfig.thirdPid)
@@ -45,7 +48,7 @@ public class JdNativeAd extends CustomNativeAd {
 
             @Override
             public void onAdLoadFailed(int code, String error) {
-                AllInLog.i("FeedAd Load Failed " + error);
+                AllInLog.i("FeedAd Load Failed " + code + error);
                 notifyAdFail(new AdError(code, error));
             }
 
@@ -96,7 +99,7 @@ public class JdNativeAd extends CustomNativeAd {
 
     @Override
     public void destroyAd() {
-        if (feedAd!=null){
+        if (feedAd != null) {
             feedAd.destroy();
         }
     }
