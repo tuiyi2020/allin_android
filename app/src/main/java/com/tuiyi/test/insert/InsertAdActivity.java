@@ -14,9 +14,8 @@ import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.user.AllInAdListener;
 import com.tuiyi.allin.user.AllInInsertAd;
 import com.tuiyi.allin.utlis.AllInToast;
-import com.tuiyi.allin.utlis.ScreenUtils;
-import com.tuiyi.test.BaseActivity;
 import com.tuiyi.test.R;
+import com.tuiyi.test.base.BaseAdActivity;
 
 /**
  * 插屏广告
@@ -24,7 +23,7 @@ import com.tuiyi.test.R;
  * @author liuhuijie
  * @date 12/24/20
  */
-public class InsertAdActivity extends BaseActivity {
+public class InsertAdActivity extends BaseAdActivity {
 
     private AllInInsertAd mAllInInsertAd;
 
@@ -57,6 +56,7 @@ public class InsertAdActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        super.initView();
         mSpinner = findViewById(R.id.spPlatform);
         mViewContain = findViewById(R.id.llContainer);
         findViewById(R.id.tvLoad).setOnClickListener(
@@ -66,7 +66,7 @@ public class InsertAdActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        initAd(TYPE_INSERT);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item,
                 mPlatformTypes);
@@ -88,13 +88,18 @@ public class InsertAdActivity extends BaseActivity {
 
     }
 
-    private void showAd() {
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlatformIds[mCurrentPos]).build();
-        switch (mPlatformTypes[mCurrentPos]) {
+    @Override
+    public void showAd() {
+        super.showAd();
+        saveAd(TYPE_INSERT);
+        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPid).build();
+        adConfig.width = mWidth;
+        adConfig.height = mHeight;
+       /* switch (mPlatformTypes[mCurrentPos]) {
             case "JD":
-                adConfig.width = ScreenUtils.getScreenWidth(this)/5;
-                adConfig.height = (adConfig.width* 3) / 2;
-        }
+                adConfig.width = ScreenUtils.getScreenWidth(this) / 5;
+                adConfig.height = (adConfig.width * 3) / 2;
+        }*/
 
 
         mAllInInsertAd = new AllInInsertAd(this, mViewContain, adConfig, new AllInAdListener() {

@@ -10,12 +10,13 @@ import cn.imeiadx.jsdk.util.OaidManager;
  * @author liuhuijie
  * @date 2020/11/17
  */
-public class MyApp extends Application {
+public class AllInApp extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
         AllInLog.enableLog(true);
         OaidManager.getOaid(this);
+        PreferencesUtils.init(this);
     }
 }

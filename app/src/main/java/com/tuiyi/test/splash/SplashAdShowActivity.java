@@ -6,12 +6,11 @@ import android.view.ViewGroup;
 
 import com.tuiyi.allin.core.AdConfig;
 import com.tuiyi.allin.core.AdError;
-import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.user.AllInAdListener;
 import com.tuiyi.allin.user.AllInSplashAd;
 import com.tuiyi.allin.utlis.AllInToast;
-import com.tuiyi.test.BaseActivity;
 import com.tuiyi.test.R;
+import com.tuiyi.test.base.BaseActivity;
 
 /**
  * 开屏展示页面
@@ -27,9 +26,11 @@ public class SplashAdShowActivity extends BaseActivity {
 
     private String mPlaceId;
 
-    public static void startActivity(Activity activity, String placeId) {
+    public static void startActivity(Activity activity, String placeId, int width, int height) {
         Intent intent = new Intent(activity, SplashAdShowActivity.class);
         intent.putExtra("placeId", placeId);
+        intent.putExtra("width", width);
+        intent.putExtra("height", height);
         activity.startActivity(intent);
     }
 
@@ -51,14 +52,16 @@ public class SplashAdShowActivity extends BaseActivity {
 
     private void showAd() {
         AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlaceId).build();
-        adConfig.width = 540;
+        adConfig.width = getIntent().getIntExtra("width", 0);
+        adConfig.height = getIntent().getIntExtra("height", 0);
+/*        adConfig.width = 540;
         adConfig.height = 720;
         switch (mPlaceId) {
             case AdConstants.JD_SPLASH_ID:
                 adConfig.width = 320;
                 adConfig.height = 480;
                 break;
-        }
+        }*/
         mAllInSplashAd = new AllInSplashAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {

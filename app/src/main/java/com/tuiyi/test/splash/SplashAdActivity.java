@@ -9,8 +9,8 @@ import android.widget.Spinner;
 
 import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.utlis.AllInToast;
-import com.tuiyi.test.BaseActivity;
 import com.tuiyi.test.R;
+import com.tuiyi.test.base.BaseAdActivity;
 
 /**
  * 开屏广告
@@ -18,10 +18,11 @@ import com.tuiyi.test.R;
  * @author liuhuijie
  * @date 12/24/20
  */
-public class SplashAdActivity extends BaseActivity {
+public class SplashAdActivity extends BaseAdActivity {
 
 
     private Spinner mSpinner;
+
 
     private String mPlatformTypes[] = new String[]{
             "JD",
@@ -48,18 +49,19 @@ public class SplashAdActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        super.initView();
         mSpinner = findViewById(R.id.spPlatform);
         findViewById(R.id.tvLoad).setOnClickListener(
-                view -> SplashAdShowActivity.startActivity(SplashAdActivity.this, mPlatformIds[mCurrentPos])
+                view -> showAd()
         );
+
 
     }
 
 
     @Override
     protected void initData() {
-
+        initAd(TYPE_SPLASH);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item,
                 mPlatformTypes);
@@ -72,6 +74,7 @@ public class SplashAdActivity extends BaseActivity {
                 AllInToast.show(SplashAdActivity.this,
                         parent.getItemAtPosition(position).toString());
                 mCurrentPos = position;
+
             }
 
             @Override
@@ -80,6 +83,13 @@ public class SplashAdActivity extends BaseActivity {
         });
 
 
+    }
+
+    @Override
+    public void showAd() {
+        super.showAd();
+        saveAd(TYPE_SPLASH);
+        SplashAdShowActivity.startActivity(SplashAdActivity.this, mPid, mWidth, mHeight);
     }
 
 }

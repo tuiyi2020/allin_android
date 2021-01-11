@@ -20,6 +20,15 @@ public interface AdConstants {
     String ALL_IN_ID = "SCFK5HUEXPSD1KHLTNWM";
 
     String CUSTOM_ID = "";
+    //测试默认开屏
+    String NORMAL_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
+    //测试默认信息流
+    String NORMAL_NATIVE_ID = "e62KtPb6SPkTwpsJH3aY";
+    //测试默认横幅
+    String NORMAL_BANNER_ID = "fXPzySZy9u0xyrzwl0p4";
+    //测试默认插屏
+    String NORMAL_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
+
     //测试京准通开屏
     String JD_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
     //测试京准通信息流

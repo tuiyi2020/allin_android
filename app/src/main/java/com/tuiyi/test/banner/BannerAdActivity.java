@@ -14,9 +14,8 @@ import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.user.AllInAdListener;
 import com.tuiyi.allin.user.AllInBannerAd;
 import com.tuiyi.allin.utlis.AllInToast;
-import com.tuiyi.allin.utlis.ScreenUtils;
-import com.tuiyi.test.BaseActivity;
 import com.tuiyi.test.R;
+import com.tuiyi.test.base.BaseAdActivity;
 
 /**
  * 横幅广告
@@ -24,7 +23,7 @@ import com.tuiyi.test.R;
  * @author liuhuijie
  * @date 12/24/20
  */
-public class BannerAdActivity extends BaseActivity {
+public class BannerAdActivity extends BaseAdActivity {
 
     private AllInBannerAd mAllInBannerAd;
 
@@ -58,7 +57,7 @@ public class BannerAdActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        super.initView();
         mSpinner = findViewById(R.id.spPlatform);
         mViewContain = findViewById(R.id.llContainer);
         findViewById(R.id.tvLoad).setOnClickListener(
@@ -68,6 +67,7 @@ public class BannerAdActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        initAd(TYPE_BANNER);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item,
                 mPlatformTypes);
@@ -91,15 +91,19 @@ public class BannerAdActivity extends BaseActivity {
     }
 
     public void showAd() {
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlatformIds[mCurrentPos]).build();
-        adConfig.width = ScreenUtils.getScreenWidth(this);
+        super.showAd();
+        saveAd(TYPE_BANNER);
+        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPid).build();
+        adConfig.width = mWidth;
+        adConfig.height = mHeight;
+/*        adConfig.width = ScreenUtils.getScreenWidth(this);
         adConfig.height = (adConfig.width * 100) / 360;
         switch (mPlatformIds[mCurrentPos]) {
             case AdConstants.JD_BANNER_ID:
                 adConfig.width = 600;
                 adConfig.height = 150;
                 break;
-        }
+        }*/
         mAllInBannerAd = new AllInBannerAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {

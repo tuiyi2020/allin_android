@@ -3,6 +3,7 @@ package com.tuiyi.test;
 import android.view.View;
 
 import com.tuiyi.test.banner.BannerAdActivity;
+import com.tuiyi.test.base.BaseActivity;
 import com.tuiyi.test.insert.InsertAdActivity;
 import com.tuiyi.test.nativead.NativeAdActivity;
 import com.tuiyi.test.splash.SplashAdActivity;

@@ -14,9 +14,8 @@ import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.user.AllInAdListener;
 import com.tuiyi.allin.user.AllInNativeAd;
 import com.tuiyi.allin.utlis.AllInToast;
-import com.tuiyi.allin.utlis.ScreenUtils;
-import com.tuiyi.test.BaseActivity;
 import com.tuiyi.test.R;
+import com.tuiyi.test.base.BaseAdActivity;
 
 /**
  * 原生广告
@@ -24,7 +23,7 @@ import com.tuiyi.test.R;
  * @author liuhuijie
  * @date 12/24/20
  */
-public class NativeAdActivity extends BaseActivity {
+public class NativeAdActivity extends BaseAdActivity {
 
     private AllInNativeAd mAllInNativeAd;
 
@@ -58,7 +57,7 @@ public class NativeAdActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        super.initView();
         mSpinner = findViewById(R.id.spPlatform);
         mViewContain = findViewById(R.id.llContainer);
         findViewById(R.id.tvLoad).setOnClickListener(
@@ -69,6 +68,7 @@ public class NativeAdActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        initAd(TYPE_NATIVE);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, android.R.layout.simple_spinner_dropdown_item,
                 mPlatformTypes);
@@ -90,10 +90,15 @@ public class NativeAdActivity extends BaseActivity {
 
     }
 
+    @Override
     public void showAd() {
+        super.showAd();
+        saveAd(TYPE_NATIVE);
+        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPid).build();
+        adConfig.height = mHeight;
+        adConfig.width = mWidth;
 
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlatformIds[mCurrentPos]).build();
-
+/*
         adConfig.width = ScreenUtils.getScreenWidth(this);
         adConfig.height = (ScreenUtils.getScreenWidth(this) * 100) / 56;
         switch (mPlatformTypes[mCurrentPos]) {
@@ -101,6 +106,7 @@ public class NativeAdActivity extends BaseActivity {
                 adConfig.width = 393;
                 adConfig.height = 262;
         }
+*/
 
 
         mAllInNativeAd = new AllInNativeAd(this, mViewContain, adConfig, new AllInAdListener() {
