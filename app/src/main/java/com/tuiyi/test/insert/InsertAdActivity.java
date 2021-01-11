@@ -14,6 +14,7 @@ import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.user.AllInAdListener;
 import com.tuiyi.allin.user.AllInInsertAd;
 import com.tuiyi.allin.utlis.AllInToast;
+import com.tuiyi.allin.utlis.ScreenUtils;
 import com.tuiyi.test.BaseActivity;
 import com.tuiyi.test.R;
 
@@ -89,6 +90,13 @@ public class InsertAdActivity extends BaseActivity {
 
     private void showAd() {
         AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlatformIds[mCurrentPos]).build();
+        switch (mPlatformTypes[mCurrentPos]) {
+            case "JD":
+                adConfig.width = ScreenUtils.getScreenWidth(this)/5;
+                adConfig.height = (adConfig.width* 3) / 2;
+        }
+
+
         mAllInInsertAd = new AllInInsertAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {

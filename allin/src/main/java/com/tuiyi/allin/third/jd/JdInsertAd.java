@@ -28,6 +28,7 @@ public class JdInsertAd extends CustomInsertAd {
 
     @Override
     public void loadAd() {
+        mAdConfig.thirdPid="6583";
         JdAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         JadPlacementParams jadSlot = new JadPlacementParams.Builder()
                 .setPlacementId(mAdConfig.thirdPid)

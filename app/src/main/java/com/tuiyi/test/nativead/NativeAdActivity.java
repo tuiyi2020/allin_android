@@ -98,8 +98,8 @@ public class NativeAdActivity extends BaseActivity {
         adConfig.height = (ScreenUtils.getScreenWidth(this) * 100) / 56;
         switch (mPlatformTypes[mCurrentPos]) {
             case "JD":
-                adConfig.width = 90;
-                adConfig.height = 160;
+                adConfig.width = 393;
+                adConfig.height = 262;
         }
 
 
