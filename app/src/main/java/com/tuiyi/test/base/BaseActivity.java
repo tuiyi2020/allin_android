@@ -1,9 +1,9 @@
 package com.tuiyi.test.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * 基础activity
@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author liuhuijie
  * @date 12/24/20
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
