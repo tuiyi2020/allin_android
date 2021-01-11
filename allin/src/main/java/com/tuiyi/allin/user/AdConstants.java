@@ -19,6 +19,7 @@ public interface AdConstants {
     //测试Id
     String ALL_IN_ID = "SCFK5HUEXPSD1KHLTNWM";
 
+    String CUSTOM_ID = "";
     //测试京准通开屏
     String JD_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
     //测试京准通信息流

@@ -89,6 +89,7 @@ public class TTInsertAd extends CustomInsertAd {
                 }
                 mTTAd = ads.get(0);
                 bindAdListener(mTTAd);
+                notifyAdReady();
                 AllInLog.i("load success !");
             }
         });
@@ -119,7 +120,6 @@ public class TTInsertAd extends CustomInsertAd {
             @Override
             public void onRenderSuccess(View view, float width, float height) {
                 //返回view的宽高 单位 dp
-                notifyAdReady();
                 mTTAd.showInteractionExpressAd(mActivity);
 
             }

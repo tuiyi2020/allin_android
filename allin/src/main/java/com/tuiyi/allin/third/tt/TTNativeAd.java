@@ -12,6 +12,7 @@ import com.bytedance.sdk.openadsdk.TTNativeExpressAd;
 import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.nativead.CustomNativeAd;
+import com.tuiyi.allin.utlis.AllInLog;
 
 import java.util.List;
 
@@ -40,7 +41,11 @@ public class TTNativeAd extends CustomNativeAd {
 
     @Override
     public void showAd() {
-
+        if (mTTAd != null) {
+            mTTAd.render();
+        } else {
+            AllInLog.i("请先加载广告");
+        }
     }
 
     @Override
@@ -85,7 +90,7 @@ public class TTNativeAd extends CustomNativeAd {
                 mTTAd = ads.get(0);
                 bindAdListener(mTTAd);
                 startTime = System.currentTimeMillis();
-                mTTAd.render();
+                notifyAdReady();
             }
         });
     }
@@ -113,7 +118,6 @@ public class TTNativeAd extends CustomNativeAd {
 
             @Override
             public void onRenderSuccess(View view, float width, float height) {
-                notifyAdReady();
                 mViewContainer.removeAllViews();
                 mViewContainer.addView(view);
             }

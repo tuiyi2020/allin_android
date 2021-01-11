@@ -17,7 +17,7 @@ public class NetManager {
 
     private NetListener mListener;
 
-    public NetManager(){
+    public NetManager() {
 
     }
 
@@ -48,8 +48,8 @@ public class NetManager {
 
                         }
                         String str = buffer.toString();
-                        if (str==null){
-                            str="";
+                        if (str == null) {
+                            str = "";
                         }
                         return str;
                     }
@@ -69,6 +69,7 @@ public class NetManager {
 
         }.execute(urlPath);//urlpath为网址
     }
+
     public void doPostJson(String urlPath, HashMap<String, String> paramsMap) {
 
         new AsyncTask<Object, Void, String>() {
@@ -82,16 +83,16 @@ public class NetManager {
                     conn.setRequestProperty("Connection", "Keep-Alive");
                     conn.setRequestProperty("Charset", "UTF-8");
                     //--------------------------------
-                    HashMap<String, String> map= (HashMap<String, String>) params[1];
+                    HashMap<String, String> map = (HashMap<String, String>) params[1];
                     conn.setDoOutput(true);
                     conn.getOutputStream().write(JsonUtils.getParams(map).getBytes());
                     //--------------------------------
                     if (conn.getResponseCode() == 200) {
                         InputStream is = conn.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                        String result=reader.readLine();
-                        if (result==null){
-                            result="";
+                        String result = reader.readLine();
+                        if (result == null) {
+                            result = "";
                         }
                         return result;
 
@@ -108,8 +109,9 @@ public class NetManager {
             }
 
 
-        }.execute(urlPath,paramsMap);//urlpath为网址
+        }.execute(urlPath, paramsMap);//urlpath为网址
     }
+
     public void doPost(String urlPath, String json) {
 
         new AsyncTask<Object, Void, String>() {
@@ -130,14 +132,14 @@ public class NetManager {
                     if (conn.getResponseCode() == 200) {
                         InputStream is = conn.getInputStream();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                        String result=reader.readLine();
-                        if (result==null){
-                            result="";
+                        String result = reader.readLine();
+                        if (result == null) {
+                            result = "";
                         }
                         return result;
 
                     }
-                    AllInLog.e("code"+conn.getResponseCode()+conn.getResponseMessage());
+                    AllInLog.e("code" + conn.getResponseCode() + conn.getResponseMessage());
                 } catch (Exception e) {
                     e.printStackTrace();
                     AllInLog.e(e.getMessage());
@@ -151,18 +153,16 @@ public class NetManager {
             }
 
 
-        }.execute(urlPath,json);//urlpath为网址
+        }.execute(urlPath, json);//urlpath为网址
     }
-
 
 
     private void parseResult(String result) {
         if (mListener != null) {
             if (result == null) {
                 mListener.onFail("网络错误");
-            }else {
+            } else {
                 mListener.onSuccess(result);
-                AllInLog.i("success:"+result);
             }
         }
     }

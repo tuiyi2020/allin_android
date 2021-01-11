@@ -95,6 +95,7 @@ public class TTBannerAd extends CustomBannerAd {
                 mTTAd = ads.get(0);
                 mTTAd.setSlideIntervalTime(30 * 1000);
                 bindAdListener(mTTAd);
+                notifyAdReady();
                 AllInLog.i("load success!");
             }
         });
@@ -123,7 +124,7 @@ public class TTBannerAd extends CustomBannerAd {
             @Override
             public void onRenderSuccess(View view, float width, float height) {
                 AllInLog.i("渲染成功");
-                notifyAdReady();
+               // notifyAdReady();
                 mViewContainer.removeAllViews();
                 mViewContainer.addView(view);
             }
