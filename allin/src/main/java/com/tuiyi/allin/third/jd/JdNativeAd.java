@@ -30,7 +30,6 @@ public class JdNativeAd extends CustomNativeAd {
     @Override
     public void loadAd() {
         mViewContainer.removeAllViews();
-        mAdConfig.thirdPid="6676";
         JdAdManagerHolder.init(mActivity.getApplication(), mAdConfig.appId);
         JadPlacementParams jadSlot = new JadPlacementParams.Builder()
                 .setPlacementId(mAdConfig.thirdPid)
