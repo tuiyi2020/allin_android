@@ -39,7 +39,7 @@ public interface AdConstants {
     String JD_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
 
     //测试头条开屏
-    String TT_SPLASH_ID = "UOZGbnASqBIndi0suUw";
+    String TT_SPLASH_ID = "3UOZGbnASqBIndi0suUw";
     //测试头条信息流
     String TT_NATIVE_ID = "PXk4HcVeyqJyvS4cgcir";
     //测试头条横幅
