@@ -34,11 +34,12 @@ public class AllInNativeAd extends BaseAllInAd {
         makeRequest(adConfig.placeId, adConfig.width, adConfig.height, SysInfoUtils.getDeviceInfo(activity), new AdNetCallBack() {
             @Override
             public void loadSuccess(AdEntity entity) {
-                AdSourceEntity adSourceEntity = entity.sourceid.get(0);
+                AdSourceEntity adSourceEntity = entity.adsource.get(0);
                 adConfig.appId=adSourceEntity.appid;
                 adConfig.thirdPid = adSourceEntity.placeid;
                 adConfig.className = adSourceEntity.classname;
-                ad = AdFactory.getNativeAd(getAdType(adSourceEntity.sourceid), adConfig);
+                adConfig.json=adSourceEntity.json;
+                ad = AdFactory.getNativeAd(getAdType(adSourceEntity), adConfig);
                 if (ad == null) {
                     adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                     return;
@@ -46,7 +47,7 @@ public class AllInNativeAd extends BaseAllInAd {
                 ad.setAdConfig(activity, adConfig, entity, adListener, new OnAdReloadListener() {
                     @Override
                     public void onAdReload(Activity activity, AdConfig adConfig, int currentPos, AdSourceEntity adSourceEntity) {
-                        ad = AdFactory.getNativeAd(getAdType(adSourceEntity.sourceid), adConfig);
+                        ad = AdFactory.getNativeAd(getAdType(adSourceEntity), adConfig);
                         if (ad == null) {
                             adListener.onAdFailed(new AdError(AdErrorCode.UNKNOWN_AD_TYPE, "未知广告类型"));
                             return;

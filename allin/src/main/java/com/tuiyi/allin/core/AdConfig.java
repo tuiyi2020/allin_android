@@ -15,6 +15,9 @@ public class AdConfig {
     //客户自定义 广告路径
     public String className;
 
+    //推易
+    public String json;//json不为空 为推易专属
+
 
     public AdConfig(Builder builder) {
         this.width = builder.width;
@@ -24,6 +27,7 @@ public class AdConfig {
         this.thirdPid = builder.thirdPid;
         this.appId = builder.appId;
         this.className = builder.className;
+        this.json = builder.json;
     }
 
     public static final class Builder {
@@ -34,6 +38,7 @@ public class AdConfig {
         private String appId;
         private String thirdPid;
         private String className;
+        private String json;
 
         public Builder() {
 
@@ -71,6 +76,11 @@ public class AdConfig {
 
         public Builder setClassName(String className) {
             this.className = className;
+            return this;
+        }
+
+        public Builder setJson(String json) {
+            this.json = json;
             return this;
         }
 

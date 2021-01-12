@@ -123,7 +123,7 @@ public class NativeAdActivity extends BaseAdActivity {
 
             @Override
             public void onAdReady() {
-
+                mAllInNativeAd.showAd();
             }
 
             @Override

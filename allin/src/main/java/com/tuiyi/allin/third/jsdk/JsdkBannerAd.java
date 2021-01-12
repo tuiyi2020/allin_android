@@ -1,33 +1,38 @@
 package com.tuiyi.allin.third.jsdk;
 
-import android.widget.FrameLayout;
-
 import com.tuiyi.allin.core.AdError;
+import com.tuiyi.allin.core.AdErrorCode;
 import com.tuiyi.allin.core.bannerad.CustomBannerAd;
 import com.tuiyi.allin.core.entity.AdEntity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cn.imeiadx.jsdk.jy.mob.JyAd;
 import cn.imeiadx.jsdk.jy.mob.JyAdListener2;
-import cn.imeiadx.jsdk.jy.mob.JyAdView;
 import cn.imeiadx.jsdk.jy.mob.JyNative;
+import cn.imeiadx.jsdk.jy.mob.JyNormalAd;
 
 /**
  * 推易轮播
+ *
  * @author liuhuijie
  * @date 2020/11/20
  */
 public class JsdkBannerAd extends CustomBannerAd {
     private JyAdListener2 mJyAdListener2;
-    private JyAdView mJyAdView;
-    public JsdkBannerAd(){
+    private JyNormalAd mJyNormalAd;
+
+    public JsdkBannerAd() {
 
     }
+
     @Override
     public void loadAd() {
-        mAdConfig.thirdPid = "GL2TTLZJK3JTFWXECFJ1";
-        mAdConfig.width = -1;
-        mAdConfig.height = -1;
-
+        if (mAdConfig.json == null) {
+            notifyAdFail(new AdError(AdErrorCode.NO_AD_ERROR, "无广告"));
+            return;
+        }
         mJyAdListener2 = new JyAdListener2() {
             @Override
             public void onADClicked() {
@@ -44,7 +49,7 @@ public class JsdkBannerAd extends CustomBannerAd {
             @Override
             public void onADReceive(JyNative jyNative) {
                 super.onADReceive(jyNative);
-                //notifyAdReady();
+
             }
 
             @Override
@@ -56,12 +61,6 @@ public class JsdkBannerAd extends CustomBannerAd {
             @Override
             public void onClosed() {
                 super.onClosed();
-                if (mJyAdView != null) {
-                    // val viewGroupParent = findViewById<ViewGroup>(android.R.id.content)
-                    if (mViewContainer != null && mViewContainer.getChildCount() > 0) {
-                        mViewContainer.removeView(mJyAdView);
-                    }
-                }
                 notifyAdClose();
             }
 
@@ -71,27 +70,32 @@ public class JsdkBannerAd extends CustomBannerAd {
                 notifyAdReady();
             }
         };
-
-        mJyAdView = JyAd.initNormalAdView(mActivity, mAdConfig.thirdPid, mAdConfig.width,
-                mAdConfig.height, mJyAdListener2, true);
-        mJyAdView.setOpen(false);
-        FrameLayout.LayoutParams params =new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT);
-//        mNormalAd.setOpen(false);
-        mViewContainer.removeAllViews();
-        mViewContainer.addView(mJyAdView, params);
+        mJyNormalAd = JyAd.getNormalAd(mActivity, mAdConfig.thirdPid, mAdConfig.width, mAdConfig.height, mViewContainer, mJyAdListener2);
+        //mJySplashAd = new JySplashAd(mActivity, mAdConfig.thirdPid, -1, -1, mAdConfig.showTime, mJyAdListener2);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(mAdConfig.json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            notifyAdFail(new AdError(AdErrorCode.PARSE_ERROR, "解析失败"));
+            return;
+        }
+        mJyNormalAd.loadAd(jsonObject);
 
     }
 
     @Override
     public void showAd() {
-
+        if (mJyNormalAd == null || !mJyNormalAd.hasAd()) {
+            return;
+        }
+        mViewContainer.removeAllViews();
+        mJyNormalAd.showAd();
     }
 
     @Override
     public void destroyAd() {
-
+        // JyAd.exit();
     }
 
     @Override

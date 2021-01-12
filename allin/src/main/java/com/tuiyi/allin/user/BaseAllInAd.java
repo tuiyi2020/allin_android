@@ -1,8 +1,11 @@
 package com.tuiyi.allin.user;
 
+import android.text.TextUtils;
+
 import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.AdErrorCode;
 import com.tuiyi.allin.core.entity.AdEntity;
+import com.tuiyi.allin.core.entity.AdSourceEntity;
 import com.tuiyi.allin.core.net.NetApi;
 import com.tuiyi.allin.core.net.NetListener;
 import com.tuiyi.allin.core.net.NetManager;
@@ -22,11 +25,14 @@ public abstract class BaseAllInAd implements IAllInAd {
     /**
      * 获取广告类型
      *
-     * @param type 后台类型
+     * @param adSourceEntity 内容
      */
 
-    protected int getAdType(String type) {
-        switch (type) {
+    protected int getAdType(AdSourceEntity adSourceEntity) {
+        if (!TextUtils.isEmpty(adSourceEntity.json)) {
+            return AdFactory.TYPE_JSDK;
+        }
+        switch (adSourceEntity.sourceid) {
             case AdConstants.TYPE_JD:
                 return AdFactory.TYPE_JD;
             case AdConstants.TYPE_GDT:
@@ -35,7 +41,7 @@ public abstract class BaseAllInAd implements IAllInAd {
                 return AdFactory.TYPE_TT;
             case "CKT0PHYUXJUR8I6DO8R5"://test
                 return AdFactory.TYPE_TT;
-                //custom
+            //custom
         }
         return -1;
     }
@@ -62,7 +68,7 @@ public abstract class BaseAllInAd implements IAllInAd {
                 AllInLog.i("success:" + result);
                 if (adNetCallBack != null) {
                     AdEntity adEntity = new AdEntity().getAdEntityByResult(result);
-                    if (adEntity.sourceid == null || adEntity.sourceid.isEmpty()) {
+                    if (adEntity.adsource== null || adEntity.adsource.isEmpty()) {
                         adNetCallBack.loadFail(new AdError(AdErrorCode.NO_AD_ERROR, "NO Ad"));
                     } else {
                         adNetCallBack.loadSuccess(adEntity);

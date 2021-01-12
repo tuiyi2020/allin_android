@@ -74,11 +74,12 @@ public abstract class AbstractAd implements IAd {
     public final void notifyAdFail(AdError adError) {
         if (mAdCallback != null && mOnAdReloadListener != null) {
             netLog(NetApi.REQUEST_FAIL_LOG);
-            if (mAdEntity != null && mAdEntity.sourceid != null && mAdEntity.sourceid.size() > ++mCurrentAdPos) {
-                mAdConfig.appId = mAdEntity.sourceid.get(mCurrentAdPos).appid;
-                mAdConfig.thirdPid = mAdEntity.sourceid.get(mCurrentAdPos).placeid;
-                mAdConfig.className = mAdEntity.sourceid.get(mCurrentAdPos).classname;
-                mOnAdReloadListener.onAdReload(mActivity, mAdConfig, mCurrentAdPos, mAdEntity.sourceid.get(mCurrentAdPos));
+            if (mAdEntity != null && mAdEntity.adsource != null && mAdEntity.adsource.size() > ++mCurrentAdPos) {
+                mAdConfig.appId = mAdEntity.adsource.get(mCurrentAdPos).appid;
+                mAdConfig.thirdPid = mAdEntity.adsource.get(mCurrentAdPos).placeid;
+                mAdConfig.className = mAdEntity.adsource.get(mCurrentAdPos).classname;
+                mAdConfig.json=mAdEntity.adsource.get(mCurrentAdPos).json;
+                mOnAdReloadListener.onAdReload(mActivity, mAdConfig, mCurrentAdPos, mAdEntity.adsource.get(mCurrentAdPos));
             } else {
                 adFailBack(adError);
             }
@@ -114,9 +115,9 @@ public abstract class AbstractAd implements IAd {
             jsonObject.put("bid", mAdEntity.bid);
             jsonObject.put("deviceinfo", SysInfoUtils.getDeviceInfo(mActivity));
 
-            if (mAdEntity.sourceid != null && mAdEntity.sourceid.get(mCurrentAdPos) != null) {
+            if (mAdEntity.adsource != null && mAdEntity.adsource.get(mCurrentAdPos) != null) {
                 JSONObject sourceObj = new JSONObject();
-                AdSourceEntity adSourceEntity = mAdEntity.sourceid.get(mCurrentAdPos);
+                AdSourceEntity adSourceEntity = mAdEntity.adsource.get(mCurrentAdPos);
                 sourceObj.put("sourceid", adSourceEntity.sourceid);
                 sourceObj.put("appid", adSourceEntity.appid);
                 sourceObj.put("sourcePlaceid", adSourceEntity.placeid);

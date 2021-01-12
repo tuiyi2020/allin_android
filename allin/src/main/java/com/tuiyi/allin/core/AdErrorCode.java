@@ -17,5 +17,7 @@ public interface AdErrorCode {
     int UN_RULES = 50001;
     //渲染失败
     int RENDER_ERROR = 60001;
+    //解析失败
+    int PARSE_ERROR=70001;
 
 }
