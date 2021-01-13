@@ -54,7 +54,7 @@ public class AllInBannerAd extends BaseAllInAd {
                         ad.setAdConfig(activity, adConfig, entity, adListener, this);
                         ad.setCurrentAdPos(currentPos);
                         if (!LocalUtils.getAdIsAvailable(activity, adSourceEntity)) {
-                            adListener.onAdFailed(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
+                            ad.notifyAdFail(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
                             return;
                         } else {
                             LocalUtils.insertAd(activity, LocalUtils.getUnitId(adSourceEntity));
@@ -64,7 +64,7 @@ public class AllInBannerAd extends BaseAllInAd {
                     }
                 });
                 if (!LocalUtils.getAdIsAvailable(activity, adSourceEntity)) {
-                    adListener.onAdFailed(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
+                    ad.notifyAdFail(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
                     return;
                 } else {
                     LocalUtils.insertAd(activity, LocalUtils.getUnitId(adSourceEntity));
