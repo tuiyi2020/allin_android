@@ -122,7 +122,7 @@ public abstract class AbstractAd implements IAd {
                 sourceObj.put("appid", adSourceEntity.appid);
                 sourceObj.put("sourcePlaceid", adSourceEntity.placeid);
                 sourceObj.put("type", adSourceEntity.type);
-                jsonObject.put("source", sourceObj);
+                jsonObject.put("adsource", sourceObj);
             }
         } catch (Exception e) {
             AllInLog.i(e.getMessage());
