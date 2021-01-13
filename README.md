@@ -4,7 +4,7 @@
 
 [2.	SDK配置](https://github.com/tuiyi2020/allin_android/wiki/SDK%E9%85%8D%E7%BD%AE)
 
-[3.	初始化说明](https://github.com/tuiyi2020/allin_android/wiki/%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AF%B4%E6%98%8E)
+[3.	初始化说明](https://github.com/tuiyi2020/allin_android/wiki/%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AF%B4%E6%98%8E)
 
 [4.	开屏说明](https://github.com/tuiyi2020/allin_android/wiki/%E5%BC%80%E5%B1%8F%E8%AF%B4%E6%98%8E)
 
