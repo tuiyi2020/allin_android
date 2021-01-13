@@ -97,11 +97,13 @@ public class LocalUtils {
         long lastShowTime = getLastShowTime(context, getUnitId(adSourceEntity));
         if (adSourceEntity.showinterval > 0 && lastShowTime > 0) {
             long passTime = System.currentTimeMillis() - lastShowTime;
+            AllInLog.i(System.currentTimeMillis()+"--last--"+lastShowTime+"---passTime----"+passTime+"--showinterval--"+adSourceEntity.showinterval*1000);
             if (adSourceEntity.showinterval * 1000 > passTime) {
                 //小于展示间隔
                 return false;
             }
         }
+
         long currentTime = System.currentTimeMillis();
         if (adSourceEntity.hourmax > 0) {
             int hourLimitTimes = getAdCount(context, getUnitId(adSourceEntity), currentTime - HOUR_TIME);
@@ -110,7 +112,7 @@ public class LocalUtils {
                 return false;
             }
         }
-        if (adSourceEntity.daymax <= 0) {
+        if (adSourceEntity.daymax >0) {
             int dayLimitTimes = getAdCount(context, getUnitId(adSourceEntity), currentTime - DAY_TIME);
             if (dayLimitTimes>=adSourceEntity.daymax) {
                 //单位日已经展示最大次数
