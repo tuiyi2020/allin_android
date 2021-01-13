@@ -41,7 +41,7 @@ public class LocalUtils {
      *
      * @param context
      */
-    public static void deleteAd(Context context) {
+    public static void deleteOutTimeAd(Context context) {
         try {
             AllInDatabase allInDatabase = new AllInDatabase(context);
             long time = System.currentTimeMillis() - DAY_TIME;
@@ -94,10 +94,10 @@ public class LocalUtils {
      * @return
      */
     public static boolean getAdIsAvailable(Context context, AdSourceEntity adSourceEntity) {
+        deleteOutTimeAd(context);
         long lastShowTime = getLastShowTime(context, getUnitId(adSourceEntity));
         if (adSourceEntity.showinterval > 0 && lastShowTime > 0) {
             long passTime = System.currentTimeMillis() - lastShowTime;
-            AllInLog.i(System.currentTimeMillis()+"--last--"+lastShowTime+"---passTime----"+passTime+"--showinterval--"+adSourceEntity.showinterval*1000);
             if (adSourceEntity.showinterval * 1000 > passTime) {
                 //小于展示间隔
                 return false;

@@ -148,7 +148,7 @@ public class AllInDatabase {
         SQLiteDatabase sqlite = dbHelper.getReadableDatabase();
         Cursor cursor = sqlite.rawQuery(sql, new String[]{unitId});
         if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
+            cursor.moveToLast();
             lastTime = (cursor.getLong(cursor.getColumnIndex(AD.Columns.DATE)));
         }
         if (!cursor.isClosed()) {

@@ -53,6 +53,12 @@ public class AllInInsertAd extends BaseAllInAd {
                         }
                         ad.setAdConfig(activity, adConfig, entity, adListener, this);
                         ad.setCurrentAdPos(currentPos);
+                        if (!LocalUtils.getAdIsAvailable(activity, adSourceEntity)) {
+                            ad.notifyAdFail(new AdError(AdErrorCode.UN_RULES, "不符合规则"));
+                            return;
+                        } else {
+                            LocalUtils.insertAd(activity, LocalUtils.getUnitId(adSourceEntity));
+                        }
                         ad.loadAd();
                     }
                 });
