@@ -1,6 +1,7 @@
 package com.tuiyi.allin.core;
 
 import android.app.Activity;
+import android.text.TextUtils;
 
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.entity.AdSourceEntity;
@@ -118,9 +119,12 @@ public abstract class AbstractAd implements IAd {
             if (mAdEntity.adsource != null && mAdEntity.adsource.get(mCurrentAdPos) != null) {
                 JSONObject sourceObj = new JSONObject();
                 AdSourceEntity adSourceEntity = mAdEntity.adsource.get(mCurrentAdPos);
+                if (!TextUtils.isEmpty(mAdEntity.adsource.get(mCurrentAdPos).json)){
+                    return;
+                }
                 sourceObj.put("sourceid", adSourceEntity.sourceid);
                 sourceObj.put("appid", adSourceEntity.appid);
-                sourceObj.put("sourcePlaceid", adSourceEntity.placeid);
+                sourceObj.put("placeid", adSourceEntity.placeid);
                 sourceObj.put("type", adSourceEntity.type);
                 jsonObject.put("adsource", sourceObj);
             }
