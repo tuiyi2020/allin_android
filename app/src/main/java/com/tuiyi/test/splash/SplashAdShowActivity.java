@@ -51,17 +51,10 @@ public class SplashAdShowActivity extends BaseActivity {
     }
 
     private void showAd() {
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlaceId).build();
-        adConfig.width = getIntent().getIntExtra("width", 0);
-        adConfig.height = getIntent().getIntExtra("height", 0);
-/*        adConfig.width = 540;
-        adConfig.height = 720;
-        switch (mPlaceId) {
-            case AdConstants.JD_SPLASH_ID:
-                adConfig.width = 320;
-                adConfig.height = 480;
-                break;
-        }*/
+        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlaceId)
+                .setWidth(getIntent().getIntExtra("width", 0))
+                .setHeight(getIntent().getIntExtra("height", 0))
+                .build();
         mAllInSplashAd = new AllInSplashAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {

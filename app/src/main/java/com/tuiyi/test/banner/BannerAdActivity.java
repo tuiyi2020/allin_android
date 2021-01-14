@@ -93,21 +93,15 @@ public class BannerAdActivity extends BaseAdActivity {
     public void showAd() {
         super.showAd();
         saveAd(TYPE_BANNER);
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPid).build();
-        adConfig.width = mWidth;
-        adConfig.height = mHeight;
-/*        adConfig.width = ScreenUtils.getScreenWidth(this);
-        adConfig.height = (adConfig.width * 100) / 360;
-        switch (mPlatformIds[mCurrentPos]) {
-            case AdConstants.JD_BANNER_ID:
-                adConfig.width = 600;
-                adConfig.height = 150;
-                break;
-        }*/
+        AdConfig adConfig = new AdConfig.Builder()
+                .setPlaceId(mPid)
+                .setWidth(mWidth)
+                .setHeight(mHeight)
+                .build();
         mAllInBannerAd = new AllInBannerAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {
-
+                AllInToast.show(BannerAdActivity.this, error.getMessage());
 
             }
 

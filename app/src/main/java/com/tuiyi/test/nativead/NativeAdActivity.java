@@ -94,25 +94,15 @@ public class NativeAdActivity extends BaseAdActivity {
     public void showAd() {
         super.showAd();
         saveAd(TYPE_NATIVE);
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPid).build();
-        adConfig.height = mHeight;
-        adConfig.width = mWidth;
-
-/*
-        adConfig.width = ScreenUtils.getScreenWidth(this);
-        adConfig.height = (ScreenUtils.getScreenWidth(this) * 100) / 56;
-        switch (mPlatformTypes[mCurrentPos]) {
-            case "JD":
-                adConfig.width = 393;
-                adConfig.height = 262;
-        }
-*/
-
-
+        AdConfig adConfig = new AdConfig.Builder()
+                .setPlaceId(mPid)
+                .setWidth(mWidth)
+                .setHeight(mHeight)
+                .build();
         mAllInNativeAd = new AllInNativeAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {
-
+                AllInToast.show(NativeAdActivity.this, error.getMessage());
 
             }
 

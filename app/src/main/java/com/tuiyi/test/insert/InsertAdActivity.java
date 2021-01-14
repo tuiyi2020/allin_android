@@ -92,21 +92,17 @@ public class InsertAdActivity extends BaseAdActivity {
     public void showAd() {
         super.showAd();
         saveAd(TYPE_INSERT);
-        AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPid).build();
-        adConfig.width = mWidth;
-        adConfig.height = mHeight;
-       /* switch (mPlatformTypes[mCurrentPos]) {
-            case "JD":
-                adConfig.width = ScreenUtils.getScreenWidth(this) / 5;
-                adConfig.height = (adConfig.width * 3) / 2;
-        }*/
+        AdConfig adConfig = new AdConfig.Builder()
+                .setPlaceId(mPid)
+                .setWidth(mWidth)
+                .setHeight(mHeight)
+                .build();
 
-
-        mAllInInsertAd = new AllInInsertAd(this, mViewContain, adConfig, new AllInAdListener() {
+        mAllInInsertAd = new AllInInsertAd(this, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {
 
-
+                AllInToast.show(InsertAdActivity.this, error.getMessage());
             }
 
             @Override

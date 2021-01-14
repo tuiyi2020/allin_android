@@ -1,7 +1,6 @@
 package com.tuiyi.allin.user;
 
 import android.app.Activity;
-import android.view.ViewGroup;
 
 import com.tuiyi.allin.core.AdConfig;
 import com.tuiyi.allin.core.AdError;
@@ -25,11 +24,10 @@ public class AllInInsertAd extends BaseAllInAd {
 
     /**
      * @param activity
-     * @param container  view容器
      * @param adConfig   广告配置
      * @param adListener 广告监听
      */
-    public AllInInsertAd(Activity activity, ViewGroup container, AdConfig adConfig, AllInAdListener adListener) {
+    public AllInInsertAd(Activity activity, AdConfig adConfig, AllInAdListener adListener) {
         makeRequest(adConfig.placeId, adConfig.width, adConfig.height, SysInfoUtils.getDeviceInfo(activity), new AdNetCallBack() {
             @Override
             public void loadSuccess(AdEntity entity) {
