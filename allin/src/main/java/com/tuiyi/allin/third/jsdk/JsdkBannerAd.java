@@ -43,7 +43,7 @@ public class JsdkBannerAd extends CustomBannerAd {
             @Override
             public void onADExposure() {
                 super.onADExposure();
-                // notifyAdReady();
+                notifyAdShow();
             }
 
             @Override

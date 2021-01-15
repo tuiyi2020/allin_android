@@ -5,15 +5,6 @@
     android:orientation="vertical">
 
 
-    <Spinner
-        android:id="@+id/spPlatform"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
-        android:visibility="gone"
-        android:spinnerMode="dropdown" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +26,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -95,10 +85,5 @@
         android:text="展示插屏"
         android:textColor="@color/black"
         android:textSize="16sp" />
-
-    <FrameLayout
-        android:id="@+id/insert_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -2,15 +2,10 @@ package com.tuiyi.test.banner;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.tuiyi.allin.core.AdConfig;
 import com.tuiyi.allin.core.AdError;
-import com.tuiyi.allin.user.AdConstants;
 import com.tuiyi.allin.user.AllInAdListener;
 import com.tuiyi.allin.user.AllInBannerAd;
 import com.tuiyi.allin.utlis.AllInToast;
@@ -29,22 +24,6 @@ public class BannerAdActivity extends BaseAdActivity {
 
     private ViewGroup mViewContain;
 
-    private Spinner mSpinner;
-
-    private String mPlatformTypes[] = new String[]{
-            "JD",
-            "GDT",
-            "TT"
-    };
-
-    private String mPlatformIds[] = new String[]{
-            AdConstants.JD_BANNER_ID,
-            AdConstants.GDT_BANNER_ID,
-            AdConstants.TT_BANNER_ID
-    };
-    private int mCurrentPos;
-
-
     public static void startActivity(Activity activity) {
         Intent intent = new Intent(activity, BannerAdActivity.class);
         activity.startActivity(intent);
@@ -58,7 +37,6 @@ public class BannerAdActivity extends BaseAdActivity {
     @Override
     protected void initView() {
         super.initView();
-        mSpinner = findViewById(R.id.spPlatform);
         mViewContain = findViewById(R.id.llContainer);
         findViewById(R.id.tvLoad).setOnClickListener(
                 view -> showAd()
@@ -68,26 +46,6 @@ public class BannerAdActivity extends BaseAdActivity {
     @Override
     protected void initData() {
         initAd(TYPE_BANNER);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_dropdown_item,
-                mPlatformTypes);
-        mSpinner.setAdapter(adapter);
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                AllInToast.show(BannerAdActivity.this,
-                        parent.getItemAtPosition(position).toString());
-                mCurrentPos = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-
     }
 
     public void showAd() {
@@ -101,6 +59,7 @@ public class BannerAdActivity extends BaseAdActivity {
         mAllInBannerAd = new AllInBannerAd(this, mViewContain, adConfig, new AllInAdListener() {
             @Override
             public void onAdFailed(AdError error) {
+
                 AllInToast.show(BannerAdActivity.this, error.getMessage());
 
             }

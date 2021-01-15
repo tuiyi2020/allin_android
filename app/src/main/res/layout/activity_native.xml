@@ -4,14 +4,6 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spPlatform"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
-        android:spinnerMode="dropdown"
-        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +26,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

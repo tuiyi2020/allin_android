@@ -44,7 +44,7 @@ public class JsdkNativeAd extends CustomNativeAd {
             @Override
             public void onADExposure() {
                 super.onADExposure();
-                // notifyAdReady();
+                notifyAdShow();
             }
 
             @Override

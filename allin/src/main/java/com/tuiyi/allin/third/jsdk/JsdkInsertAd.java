@@ -44,7 +44,7 @@ public class JsdkInsertAd extends CustomInsertAd {
             @Override
             public void onADExposure() {
                 super.onADExposure();
-                // notifyAdReady();
+                notifyAdShow();
             }
 
             @Override
