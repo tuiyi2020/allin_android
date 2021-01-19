@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.jd.ad.sdk.JadYunSdk;
 import com.jd.ad.sdk.JadYunSdkConfig;
+import com.tuiyi.allin.utlis.AllInLog;
 
 /**
  * 可以用一个单例来保存JdAdManager实例，在需要初始化sdk的时候调用
@@ -26,9 +27,7 @@ public class JdAdManagerHolder {
     private static JadYunSdkConfig buildConfig(String appId) {
         return new JadYunSdkConfig.Builder()
                 .setAppId(appId)
-                //.setAppId("337230")
-                //.setAppId("116567")
-                .setEnableLog(true)
+                .setEnableLog(AllInLog.getLogEnable())
                 .build();
     }
 }

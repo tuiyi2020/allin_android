@@ -14,6 +14,10 @@ public class AllInLog {
 
     private static boolean logEnable = false;
 
+    public static boolean getLogEnable(){
+        return logEnable;
+    }
+
     public static void enableLog(boolean logEnable) {
         AllInLog.logEnable = logEnable;
     }
