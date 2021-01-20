@@ -2,7 +2,6 @@ package com.tuiyi.allin.third.tt;
 
 import android.view.View;
 
-import androidx.annotation.MainThread;
 
 import com.bytedance.sdk.openadsdk.AdSlot;
 import com.bytedance.sdk.openadsdk.TTAdConstant;
@@ -60,20 +59,17 @@ public class TTSplashAd extends CustomSplashAd {
         //step4:请求广告，调用开屏广告异步请求接口，对请求回调的广告作渲染处理
         mTTAdNative.loadSplashAd(adSlot, new TTAdNative.SplashAdListener() {
             @Override
-            @MainThread
             public void onError(int code, String message) {
                 AllInLog.i("code" + code + "message" + message);
                 notifyAdFail(new AdError(code, message));
             }
 
             @Override
-            @MainThread
             public void onTimeout() {
                 AllInLog.i("开屏广告加载超时");
             }
 
             @Override
-            @MainThread
             public void onSplashAdLoad(com.bytedance.sdk.openadsdk.TTSplashAd ad) {
                 AllInLog.i("开屏广告请求成功");
                 if (ad == null) {
