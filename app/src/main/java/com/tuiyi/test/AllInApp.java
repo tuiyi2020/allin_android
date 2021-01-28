@@ -17,7 +17,7 @@ public class AllInApp extends Application {
         //sdk配置
         AllInSdkConfig config = AllInSdkConfig.newConfig()
                 //是否打开日志
-                .setEnableLog(false)
+                .setEnableLog(true)
                 .build();
         //初始化sdk
         AllInSdk.init(this, config);
