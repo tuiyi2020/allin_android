@@ -12,8 +12,7 @@ import com.tuiyi.allin.core.AdError;
 import com.tuiyi.allin.core.AdErrorCode;
 import com.tuiyi.allin.core.entity.AdEntity;
 import com.tuiyi.allin.core.splashad.CustomSplashAd;
-
-import cn.imeiadx.jsdk.util.OaidManager;
+import com.tuiyi.allin.oaid.OAIdManager;
 
 /**
  * 爱奇艺开屏
@@ -45,8 +44,7 @@ public class QySplashAd extends CustomSplashAd {
                 // .latitude(55)
                 // .longitude(48)
                 //设置OAID，需要app接入信通院的SDK，强烈建议设置此值
-                // TODO: 1/27/21
-                .oaid(OaidManager.getOaid(mActivity))
+                .oaid(OAIdManager.getOAId(mActivity))
                 //设置用户的年龄区间，可选
                 // .userAge(601)
                 //设置用户的性别，可选

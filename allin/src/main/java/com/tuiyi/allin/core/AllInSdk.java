@@ -2,9 +2,8 @@ package com.tuiyi.allin.core;
 
 import android.content.Context;
 
+import com.tuiyi.allin.oaid.OAIdManager;
 import com.tuiyi.allin.utlis.AllInLog;
-
-import cn.imeiadx.jsdk.util.OaidManager;
 
 /**
  * sdk入口
@@ -15,7 +14,7 @@ import cn.imeiadx.jsdk.util.OaidManager;
 public class AllInSdk {
     public static void init(Context context, AllInSdkConfig allInSdkConfig) {
         if (context != null) {
-            OaidManager.getOaid(context);
+            OAIdManager.getOAId(context);
         } else {
             throw new RuntimeException("context为空");
         }

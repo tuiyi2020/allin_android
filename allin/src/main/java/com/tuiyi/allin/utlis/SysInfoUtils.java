@@ -31,6 +31,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 
+import com.tuiyi.allin.oaid.OAIdManager;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import cn.imeiadx.jsdk.util.OaidManager;
+
 
 import static android.content.Context.USAGE_STATS_SERVICE;
 import static android.content.Context.WIFI_SERVICE;
@@ -683,7 +685,7 @@ public class SysInfoUtils {
             sysInfoObj.put("height", height);
             sysInfoObj.put("ua", ua);
             //td
-            sysInfoObj.put("oaid", "f5dbbf751ab5");
+            sysInfoObj.put("oaid", OAIdManager.getOAId(context));
             sysInfoObj.put("idfa", "");
             sysInfoObj.put("imei", imei);
             sysInfoObj.put("mac", mac);
@@ -747,7 +749,7 @@ public class SysInfoUtils {
             sysInfoObj.put("lng", lng);
             sysInfoObj.put("appusetime", appusetime);
             sysInfoObj.put("applist", applist);
-            sysInfoObj.put("oaid", OaidManager.getOaid(context));
+            sysInfoObj.put("oaid", OAIdManager.getOAId(context));
 
             sysInfoObj.put("brightness", getSystemBrightness(context));
             sysInfoObj.put("systemvolume", getSystemVolume(context));
