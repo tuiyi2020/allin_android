@@ -14,6 +14,10 @@ public interface AdConstants {
     String TYPE_TT = "LDPXSWDIYICUNBFU4EMM";
     // 京东SDK
     String TYPE_JD = "URULEHLH21ZFVXESMGBH";
+    // 奇艺SDK
+    String TYPE_QY = "Z90S7LNJPX39IJZX8UF3";
+    // 奇艺SDK
+    String TYPE_CUSTOM = "TEST_CUSTOM";
 
 
     //测试Id
@@ -56,13 +60,18 @@ public interface AdConstants {
     //测试广点通插屏
     String GDT_INSERT_ID = "3ZCUQBOPRCWQUK634UXE";
 
-    //测试JSDK开屏
+    //测试推易开屏
     String JSDK_SPLASH_ID = "6kqzOb1wONzf0PNTUz2d";
-    //测试广点通信息流
+    //测试推易信息流
     String JSDK_NATIVE_ID = "e62KtPb6SPkTwpsJH3aY";
-    //测试广点通横幅
+    //测试推易横幅
     String JSDK_BANNER_ID = "fXPzySZy9u0xyrzwl0p4";
-    //测试广点通插屏
+    //测试推易插屏
     String JSDK_INSERT_ID = "rcuOOlSR1dowds8mg8AD";
+
+    //测试爱奇艺开屏
+    String QY_SPLASH_ID = "DIM52WVX18ZLGZYSICPK";
+    //测试爱奇艺横幅
+    String QY_BANNER_ID = "CLXB6BDXSPAJYMA72MTG";
 
 }

@@ -18,6 +18,8 @@ import com.tuiyi.allin.third.jsdk.JsdkBannerAd;
 import com.tuiyi.allin.third.jsdk.JsdkInsertAd;
 import com.tuiyi.allin.third.jsdk.JsdkNativeAd;
 import com.tuiyi.allin.third.jsdk.JsdkSplashAd;
+import com.tuiyi.allin.third.qy.QyBannerAd;
+import com.tuiyi.allin.third.qy.QySplashAd;
 import com.tuiyi.allin.third.tt.TTBannerAd;
 import com.tuiyi.allin.third.tt.TTInsertAd;
 import com.tuiyi.allin.third.tt.TTNativeAd;
@@ -37,6 +39,7 @@ public class AdFactory {
     public static final int TYPE_JD = 3;
     public static final int TYPE_TT = 4;
     public static final int TYPE_CUSTOM = 5;
+    public static final int TYPE_QY = 6;
 
     public static CustomSplashAd getSplashAd(int type, AdConfig adConfig) {
         switch (type) {
@@ -48,6 +51,8 @@ public class AdFactory {
                 return new TTSplashAd();
             case TYPE_JSDK:
                 return new JsdkSplashAd();
+            case TYPE_QY:
+                return new QySplashAd();
             case TYPE_CUSTOM:
                 String className = adConfig.className;
                 Object object = getInstanceByClassName(className);
@@ -109,6 +114,8 @@ public class AdFactory {
                 return new TTBannerAd();
             case TYPE_JSDK:
                 return new JsdkBannerAd();
+            case TYPE_QY:
+                return new QyBannerAd();
             case TYPE_CUSTOM:
                 String className = adConfig.className;
                 Object object = getInstanceByClassName(className);

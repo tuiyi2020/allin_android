@@ -59,4 +59,5 @@ dependencies {
     implementation 'com.tuiyi.lib:bd:1.0.0'
     implementation 'com.tuiyi.lib:jd:1.0.0'
     implementation 'com.tuiyi.lib:tt:1.0.0'
+    implementation 'com.tuiyi.lib:qy:1.0.0'
 }

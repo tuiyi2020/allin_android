@@ -44,6 +44,7 @@ dependencies {
     compileOnly 'com.tuiyi.lib:bd:1.0.0'
     compileOnly 'com.tuiyi.lib:jd:1.0.0'
     compileOnly 'com.tuiyi.lib:tt:1.0.0'
+    compileOnly 'com.tuiyi.lib:qy:1.0.0'
 }
 //apply from: "lib_upload.gradle"
 //apply from: "sdk_upload.gradle"

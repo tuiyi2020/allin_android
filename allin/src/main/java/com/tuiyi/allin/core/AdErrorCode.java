@@ -19,5 +19,9 @@ public interface AdErrorCode {
     int RENDER_ERROR = 60001;
     //解析失败
     int PARSE_ERROR=70001;
+    //三方未知错误
+    int THIRD_UNKNOWN_ERROR=80001;
+    //广告请求超时
+    int TIME_OUT_ERROR=90001;
 
 }

@@ -39,8 +39,10 @@ public abstract class BaseAllInAd implements IAllInAd {
                 return AdFactory.TYPE_GDT;
             case AdConstants.TYPE_TT:
                 return AdFactory.TYPE_TT;
-            case "CKT0PHYUXJUR8I6DO8R5"://test
-                return AdFactory.TYPE_TT;
+            case AdConstants.TYPE_CUSTOM://test
+                return AdFactory.TYPE_CUSTOM;
+            case AdConstants.TYPE_QY:
+                return AdFactory.TYPE_QY;
             //custom
         }
         return -1;
@@ -68,7 +70,7 @@ public abstract class BaseAllInAd implements IAllInAd {
                 AllInLog.i("success:" + result);
                 if (adNetCallBack != null) {
                     AdEntity adEntity = new AdEntity().getAdEntityByResult(result);
-                    if (adEntity.adsource== null || adEntity.adsource.isEmpty()) {
+                    if (adEntity.adsource == null || adEntity.adsource.isEmpty()) {
                         adNetCallBack.loadFail(new AdError(AdErrorCode.NO_AD_ERROR, "NO Ad"));
                     } else {
                         adNetCallBack.loadSuccess(adEntity);
