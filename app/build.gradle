@@ -54,7 +54,7 @@ dependencies {
     //implementation 'com.tuiyi.sdk:allin:2.0.3'
     //implementation (name:'allin-release-2.0.3',ext:'aar')
     implementation project(path: ':allin')
-    implementation 'com.tuiyi.sdk:jsdk-oaid-test:1.0.66'
+    implementation 'com.tuiyi.sdk:jsdk-oaid:1.0.7'
     implementation 'com.tuiyi.lib:gdt:1.0.0'
     implementation 'com.tuiyi.lib:bd:1.0.0'
     implementation 'com.tuiyi.lib:jd:1.0.0'
