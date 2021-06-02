@@ -51,8 +51,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //implementation 'com.tuiyi.sdk:allin:2.0.4'
-    //implementation (name:'allin-release-2.0.4',ext:'aar')
+    //implementation 'com.tuiyi.sdk:allin:2.0.5'
+    //implementation (name:'allin-release-2.0.5',ext:'aar')
     implementation project(path: ':allin')
     implementation 'com.tuiyi.sdk:jsdk-oaid:1.0.9'
     implementation 'com.tuiyi.lib:gdt:1.0.0'
