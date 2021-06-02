@@ -34,7 +34,9 @@ public class JsdkSplashAd extends CustomSplashAd {
             notifyAdFail(new AdError(AdErrorCode.NO_AD_ERROR, "无广告"));
             return;
         }
-        mAdConfig.showTime=15;
+        if (mAdConfig.showTime <= 0) {
+            mAdConfig.showTime = 15;
+        }
         mJyAdListener2 = new JyAdListener2() {
             @Override
             public void onADClicked() {
@@ -72,9 +74,9 @@ public class JsdkSplashAd extends CustomSplashAd {
                 notifyAdReady();
             }
         };
-        mJySplashAd= JyAd.getSplashAd(mActivity,null,mAdConfig.width,mAdConfig.height,mAdConfig.showTime,mJyAdListener2);
+        mJySplashAd = JyAd.getSplashAd(mActivity, null, mAdConfig.width, mAdConfig.height, mAdConfig.showTime,mViewContainer, mJyAdListener2);
         //mJySplashAd = new JySplashAd(mActivity, mAdConfig.thirdPid, -1, -1, mAdConfig.showTime, mJyAdListener2);
-        JSONObject jsonObject= null;
+        JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(mAdConfig.json);
         } catch (JSONException e) {
@@ -87,7 +89,7 @@ public class JsdkSplashAd extends CustomSplashAd {
 
     @Override
     public void showAd() {
-        if (mJySplashAd == null ||!mJySplashAd.hasAd()) {
+        if (mJySplashAd == null || !mJySplashAd.hasAd()) {
             return;
         }
         mJySplashAd.showAd();

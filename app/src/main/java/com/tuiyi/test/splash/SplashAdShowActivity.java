@@ -52,6 +52,7 @@ public class SplashAdShowActivity extends BaseActivity {
 
     private void showAd() {
         AdConfig adConfig = new AdConfig.Builder().setPlaceId(mPlaceId)
+                .setShowTime(12)
                 .setWidth(getIntent().getIntExtra("width", 0))
                 .setHeight(getIntent().getIntExtra("height", 0))
                 .build();
